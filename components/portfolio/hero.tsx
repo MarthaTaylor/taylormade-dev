@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Award, Download, Github, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { person } from '@/lib/portfolio/content';
+import { GoogleWord } from '@/components/portfolio/google-word';
 
 export function Hero() {
   return (
@@ -38,13 +39,17 @@ export function Hero() {
             {person.tagline}
           </p>
 
-          {/* Highlighted award badge */}
-          <div className="mt-5 inline-flex max-w-full items-center gap-2 rounded-full border border-amber-300/60 bg-gradient-to-r from-amber-50 to-orange-50 px-3 py-1.5 text-[13px] font-medium text-amber-900 shadow-sm dark:border-amber-500/30 dark:from-amber-500/10 dark:to-orange-500/10 dark:text-amber-200">
-            <Award className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" aria-hidden />
-            <span>
-              Google &middot; Udacity Front-End NanoDegree
-              <span className="mx-1.5 text-amber-700/60 dark:text-amber-300/60">&mdash;</span>
-              <span className="font-semibold">top 2% EMEA</span>
+          {/* Google-brand-coloured award badge */}
+          <div className="mt-5 inline-flex max-w-full items-center gap-2 rounded-full border border-border/70 bg-card px-3 py-1.5 text-[13px] font-medium shadow-sm">
+            <Award className="h-3.5 w-3.5 text-[#4285F4]" aria-hidden />
+            <span className="flex flex-wrap items-center gap-x-1.5">
+              <GoogleWord />
+              <span className="text-muted-foreground">&middot;</span>
+              <span>Udacity Front-End NanoDegree</span>
+              <span className="text-muted-foreground">&mdash;</span>
+              <span className="rounded-md bg-gradient-to-r from-[#4285F4]/12 via-[#EA4335]/12 to-[#34A853]/12 px-1.5 py-0.5 font-semibold text-foreground">
+                top 2% EMEA
+              </span>
             </span>
           </div>
 

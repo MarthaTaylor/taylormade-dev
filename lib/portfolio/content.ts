@@ -5,7 +5,7 @@ export const person = {
   name: 'Martha Taylor',
   role: 'Senior Full-Stack Engineer',
   tagline:
-    'Senior full-stack engineer with platform & security depth. React, Next.js and TypeScript on top; secure, well-tooled foundations underneath.',
+    'Senior full-stack engineer. Platform, CI/CD, security & DevSecOps focus \u2014 with AI woven in where it earns its keep.',
   location: 'United Kingdom',
   email: 'hello@marthataylor.dev',
   github: 'https://github.com/MarthaTaylor',

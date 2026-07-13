@@ -3,8 +3,9 @@
 import * as React from 'react';
 import { Award } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { skillGroups, awards } from '@/lib/portfolio/content';
+import { skillGroups } from '@/lib/portfolio/content';
 import { SectionAchievement } from '@/components/portfolio/gamification';
+import { GoogleWord } from '@/components/portfolio/google-word';
 
 export function Skills() {
   return (
@@ -41,20 +42,25 @@ export function Skills() {
               </div>
             ))}
 
-            {/* Recognition / awards */}
-            <div className="rounded-xl border border-amber-300/50 bg-gradient-to-br from-amber-50/70 to-orange-50/40 p-5 dark:border-amber-500/25 dark:from-amber-500/10 dark:to-orange-500/5">
+            {/* Recognition / awards \u2014 Google-branded */}
+            <div className="rounded-xl border border-border/70 bg-card p-5 shadow-sm">
               <div className="flex items-start gap-3">
-                <Award className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
+                <Award className="mt-0.5 h-5 w-5 shrink-0 text-[#4285F4]" aria-hidden />
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-widest text-amber-800 dark:text-amber-300">
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
                     Recognition
                   </p>
-                  <ul className="mt-1.5 space-y-1 text-[15px] text-foreground/90">
-                    {awards.map((a, i) => (
-                      <li key={i} className="leading-relaxed">
-                        {a}
-                      </li>
-                    ))}
+                  <ul className="mt-2 space-y-1.5 text-[15px] text-foreground/90">
+                    <li className="leading-relaxed">
+                      <GoogleWord />
+                      <span className="mx-1.5 text-muted-foreground">&middot;</span>
+                      Udacity Front-End Web Development NanoDegree
+                      <span className="mx-1.5 text-muted-foreground">&mdash;</span>
+                      <span className="rounded-md bg-gradient-to-r from-[#4285F4]/12 via-[#EA4335]/12 to-[#34A853]/12 px-1.5 py-0.5 font-semibold">
+                        top 2% EMEA
+                      </span>
+                    </li>
+                    <li className="leading-relaxed">Studying towards AWS certification</li>
                   </ul>
                 </div>
               </div>
