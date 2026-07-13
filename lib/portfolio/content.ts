@@ -15,7 +15,7 @@ export const person = {
 };
 
 export const about = [
-  "I'm a senior full-stack engineer with 7+ years shipping product across enterprise retail, healthcare SaaS and automotive platform engineering. My focus sits across the whole stack these days \u2014 building the product on top, keeping the platform, CI/CD, security and DevSecOps healthy underneath, and leaning on AI where it earns its keep.",
+  "I'm a senior full-stack engineer with 7+ years shipping product across enterprise retail, healthcare SaaS and automotive platform engineering. My focus sits across the whole stack these days — building the product on top, keeping the platform, CI/CD, security and DevSecOps healthy underneath, and leaning on AI where it earns its keep.",
   "How I work: secure by default, ship little and often, test-backed. I like small clean interfaces, typed contracts end-to-end, and infrastructure that reads like documentation. I lean into least-privilege IAM, OWASP-minded reviews and CI/CD that catches problems before humans do.",
 ];
 
@@ -40,9 +40,9 @@ export const skillGroups = [
     items: ['Terraform', 'CI/CD', 'Golden paths', 'Developer platforms'],
   },
   {
-    title: 'Security',
+    title: 'Security & DevSecOps',
     tier: 'secondary',
-    items: ['OAuth', 'RBAC', 'OWASP', 'IAM least-privilege', 'Threat modelling'],
+    items: ['OAuth', 'RBAC', 'OWASP', 'IAM least-privilege', 'Threat modelling', 'DevSecOps'],
   },
   {
     title: 'Cloud',
@@ -56,11 +56,10 @@ export const skillGroups = [
   },
 ];
 
-// Two hero ("featured") projects at the top of the projects section.
 export const heroProjects = [
   {
     id: 'pennylane-transactions',
-    title: 'Pennylane-style Transactions Interface',
+    title: 'Financial Transactions Interface',
     subtitle: 'React + TypeScript engineering challenge',
     stack: ['React', 'TypeScript', 'React Query', 'Zod', 'react-hook-form', 'Vitest'],
     problem:
@@ -108,15 +107,13 @@ export const heroProjects = [
   },
 ];
 
-// Repos to fetch and render as "Other projects". Order matters.
+// Repos rendered as "Other projects" cards. Order matters.
 export const otherRepos = [
   // Product / side-project work
   'https://github.com/Alumsdesigns/floodsave',
-  'https://github.com/Alumsdesigns/quiporder',
   'https://github.com/Alumsdesigns/standup-updates-app',
-  'https://github.com/Alumsdesigns/davinaleilaniblooms',
   'https://github.com/Alumsdesigns/quizverse',
-  // Frontend foundation work from the Google/Udacity NanoDegree (starred on profile)
+  // Frontend foundation work from the Google/Udacity NanoDegree
   'https://github.com/MarthaTaylor/fend-project-memory-game',
   'https://github.com/MarthaTaylor/frontend-nanodegree-arcade-game',
   'https://github.com/MarthaTaylor/frontend-nanodegree-feedreader',
@@ -124,9 +121,6 @@ export const otherRepos = [
   'https://github.com/MarthaTaylor/mws-restaurant-stage-1',
 ];
 
-// Hand-crafted senior-voice summaries per repo, read from the actual READMEs.
-// Used when the LLM budget is exhausted OR to override AI output.
-// To add live AI: leave a key out here and the LLM path will run for that repo.
 export const preGeneratedSummaries: Record<
   string,
   {
@@ -146,15 +140,6 @@ export const preGeneratedSummaries: Record<
     result: '',
     liveDemoUrl: 'https://floodsave-bf0f49c3b6af.herokuapp.com/',
   },
-  'https://github.com/Alumsdesigns/quiporder': {
-    problem:
-      'Manage equipment orders and workflows for occupational-therapy teams, with clear role-based access for admins, therapists and suppliers.',
-    approach:
-      'Django full-stack app with role-based dashboards and PostgreSQL persistence. Server-rendered CRUD flows, manual testing across every admin path, wireframe-first UX and deployment on Heroku.',
-    tech: ['Django', 'Python', 'PostgreSQL', 'Bootstrap', 'Heroku'],
-    result: '',
-    liveDemoUrl: 'https://quiptorder-f48affb2ee2c.herokuapp.com',
-  },
   'https://github.com/Alumsdesigns/standup-updates-app': {
     problem:
       "Give teams one clean place to record daily standup updates — yesterday, today, blockers — instead of losing them in sticky notes and chat.",
@@ -163,15 +148,6 @@ export const preGeneratedSummaries: Record<
     tech: ['Python', 'Google Sheets API', 'Heroku'],
     result: '',
     liveDemoUrl: 'https://standup-updates-app-5910da38655e.herokuapp.com/',
-  },
-  'https://github.com/Alumsdesigns/davinaleilaniblooms': {
-    problem:
-      'A responsive brochure site for a luxury faux-flower design studio so prospective clients can browse the portfolio and make enquiries on any device.',
-    approach:
-      'Hand-crafted HTML and CSS with a mobile-first responsive layout, semantic markup and accessible navigation. Content-first design, fast load times, no unnecessary JavaScript.',
-    tech: ['HTML5', 'CSS3', 'Responsive design', 'GitHub Pages'],
-    result: '',
-    liveDemoUrl: 'https://alumsdesigns.github.io/davinaleilaniblooms/',
   },
   'https://github.com/Alumsdesigns/quizverse': {
     problem:
@@ -261,7 +237,6 @@ export const awards = [
   'Studying towards AWS certification',
 ];
 
-// Gamification config (edit freely)
 export const achievementsList = [
   { id: 'first-steps', title: 'First Steps', description: 'Landed on the portfolio.', xp: 5, icon: '👋' },
   { id: 'about-reader', title: 'About Reader', description: 'Read the About section.', xp: 10, icon: '📖' },

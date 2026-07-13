@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useGamification } from '@/components/portfolio/gamification';
+import { RepoVisual } from '@/components/portfolio/visuals/repo-visuals';
 
 export type RepoCardData = {
   name: string;
@@ -28,17 +29,22 @@ export function RepoCard({ data, index }: { data: RepoCardData; index: number })
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.3), ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.45, delay: Math.min(index * 0.05, 0.3), ease: [0.16, 1, 0.3, 1] }}
       className="h-full"
     >
-      <Card className="group flex h-full flex-col border-border/70 transition-colors hover:border-foreground/30">
+      <Card className="group flex h-full flex-col overflow-hidden border-border/70 transition-colors hover:border-foreground/30">
+        {/* Visual cover */}
+        <div className="relative aspect-[16/9] w-full border-b border-border/60" role="img" aria-label={`${prettify(data.name)} illustration`}>
+          <RepoVisual name={data.name} />
+        </div>
+
         <CardContent className="flex flex-1 flex-col gap-4 p-6">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <h4 className="text-base font-semibold tracking-tight">{prettify(data.name)}</h4>
+              <h4 className="text-[17px] font-semibold tracking-tight">{prettify(data.name)}</h4>
               {data.language && (
                 <p className="mt-0.5 text-xs text-muted-foreground">{data.language}</p>
               )}
@@ -53,26 +59,26 @@ export function RepoCard({ data, index }: { data: RepoCardData; index: number })
           {summary.problem && (
             <div>
               <p className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">Problem</p>
-              <p className="mt-1 text-sm leading-relaxed text-foreground/90">{summary.problem}</p>
+              <p className="mt-1 text-[15px] leading-relaxed text-foreground/95">{summary.problem}</p>
             </div>
           )}
           {summary.approach && (
             <div>
               <p className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">Approach</p>
-              <p className="mt-1 text-sm leading-relaxed text-foreground/90">{summary.approach}</p>
+              <p className="mt-1 text-[15px] leading-relaxed text-foreground/95">{summary.approach}</p>
             </div>
           )}
           {summary.result && (
             <div>
               <p className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">Result</p>
-              <p className="mt-1 text-sm leading-relaxed text-foreground/90">{summary.result}</p>
+              <p className="mt-1 text-[15px] leading-relaxed text-foreground/95">{summary.result}</p>
             </div>
           )}
 
           {summary.tech.length > 0 && (
             <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
               {summary.tech.map((t) => (
-                <Badge key={t} variant="secondary" className="rounded-full text-[10px] font-normal">
+                <Badge key={t} variant="secondary" className="rounded-full text-[11px] font-normal">
                   {t}
                 </Badge>
               ))}

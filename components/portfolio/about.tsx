@@ -13,7 +13,7 @@ export function About() {
             <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">About</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight md:text-3xl">How I work</h2>
           </div>
-          <div className="space-y-4 text-[15px] leading-relaxed text-foreground/90 md:text-base">
+          <div className="space-y-5 text-base leading-relaxed text-foreground/95 md:text-lg">
             {about.map((p, i) => (
               <p key={i}>{p}</p>
             ))}

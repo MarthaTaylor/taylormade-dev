@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, Github, Linkedin } from 'lucide-react';
+import { ArrowRight, Award, Download, Github, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { person } from '@/lib/portfolio/content';
 
@@ -34,9 +34,19 @@ export function Hero() {
             {person.name}
           </h1>
 
-          <p className="mt-4 max-w-2xl text-balance text-lg text-muted-foreground md:text-xl">
+          <p className="mt-4 max-w-2xl text-balance text-lg text-foreground/80 md:text-xl">
             {person.tagline}
           </p>
+
+          {/* Highlighted award badge */}
+          <div className="mt-5 inline-flex max-w-full items-center gap-2 rounded-full border border-amber-300/60 bg-gradient-to-r from-amber-50 to-orange-50 px-3 py-1.5 text-[13px] font-medium text-amber-900 shadow-sm dark:border-amber-500/30 dark:from-amber-500/10 dark:to-orange-500/10 dark:text-amber-200">
+            <Award className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" aria-hidden />
+            <span>
+              Google &middot; Udacity Front-End NanoDegree
+              <span className="mx-1.5 text-amber-700/60 dark:text-amber-300/60">&mdash;</span>
+              <span className="font-semibold">top 2% EMEA</span>
+            </span>
+          </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Button size="lg" asChild>
