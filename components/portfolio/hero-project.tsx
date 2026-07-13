@@ -2,14 +2,17 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Code2, ImageIcon } from 'lucide-react';
+import { ExternalLink, Code2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { PennylaneVisual } from './visuals/pennylane-visual';
+import { GenkitVisual } from './visuals/genkit-visual';
 
 type Props = {
   index: number;
   project: {
+    id: string;
     title: string;
     subtitle: string;
     stack: string[];
@@ -23,6 +26,12 @@ type Props = {
   };
 };
 
+function VisualFor({ id }: { id: string }) {
+  if (id === 'pennylane-transactions') return <PennylaneVisual />;
+  if (id === 'genkit-content-scraper') return <GenkitVisual />;
+  return null;
+}
+
 export function HeroProject({ project, index }: Props) {
   return (
     <motion.div
@@ -33,16 +42,13 @@ export function HeroProject({ project, index }: Props) {
     >
       <Card className="overflow-hidden border-border/70">
         <div className="grid gap-0 md:grid-cols-2">
-          {/* Screenshot slot */}
-          <div className="relative order-1 aspect-[4/3] w-full bg-gradient-to-br from-muted/60 via-muted/30 to-background md:order-none md:aspect-auto">
-            <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
-              <div className="flex flex-col items-center gap-2 text-center">
-                <ImageIcon className="h-8 w-8 opacity-40" />
-                <span className="text-xs uppercase tracking-widest">Screenshot slot</span>
-                <span className="px-6 text-xs text-muted-foreground/70">{project.screenshotAlt}</span>
-              </div>
-            </div>
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.4)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.4)_1px,transparent_1px)] bg-[size:32px_32px] opacity-40" />
+          {/* Visual */}
+          <div
+            role="img"
+            aria-label={project.screenshotAlt}
+            className="relative order-1 aspect-[4/3] w-full bg-gradient-to-br from-muted/40 via-muted/10 to-background md:order-none md:aspect-auto md:min-h-[420px]"
+          >
+            <VisualFor id={project.id} />
           </div>
 
           <CardContent className="space-y-5 p-6 md:p-8">
