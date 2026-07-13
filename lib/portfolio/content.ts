@@ -23,7 +23,16 @@ export const skillGroups = [
   {
     title: 'Core',
     tier: 'primary',
-    items: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Python / FastAPI', 'PostgreSQL'],
+    items: [
+      'React',
+      'Next.js',
+      'TypeScript',
+      'JavaScript',
+      'ES6+ / ECMAScript',
+      'Node.js',
+      'Python / FastAPI',
+      'PostgreSQL',
+    ],
   },
   {
     title: 'Platform',
@@ -69,8 +78,8 @@ export const heroProjects = [
       'Offline-first cache via IndexedDB for a snappier reopen.',
       'Broader state-transition test coverage with Playwright.',
     ],
-    demoUrl: null as string | null, // add a public demo URL only if you have one
-    codeUrl: null as string | null, // deliberately not linked per the brief
+    demoUrl: null as string | null,
+    codeUrl: null as string | null,
     screenshotAlt: 'Transactions table with filters, search and pagination',
   },
   {
@@ -101,16 +110,124 @@ export const heroProjects = [
 
 // Repos to fetch and render as "Other projects". Order matters.
 export const otherRepos = [
+  // Product / side-project work
   'https://github.com/Alumsdesigns/floodsave',
   'https://github.com/Alumsdesigns/quiporder',
   'https://github.com/Alumsdesigns/standup-updates-app',
   'https://github.com/Alumsdesigns/davinaleilaniblooms',
   'https://github.com/Alumsdesigns/quizverse',
+  // Frontend foundation work from the Google/Udacity NanoDegree (starred on profile)
+  'https://github.com/MarthaTaylor/fend-project-memory-game',
+  'https://github.com/MarthaTaylor/frontend-nanodegree-arcade-game',
+  'https://github.com/MarthaTaylor/frontend-nanodegree-feedreader',
+  'https://github.com/MarthaTaylor/reactnd-project-myreads-starter',
+  'https://github.com/MarthaTaylor/mws-restaurant-stage-1',
 ];
 
-// Optional additional pinned repos from Martha's own profile (auto-discovered
-// at fetch time via GitHub's users API when this list is empty).
-export const extraPinnedRepos: string[] = [];
+// Hand-crafted senior-voice summaries per repo, read from the actual READMEs.
+// Used when the LLM budget is exhausted OR to override AI output.
+// To add live AI: leave a key out here and the LLM path will run for that repo.
+export const preGeneratedSummaries: Record<
+  string,
+  {
+    problem: string;
+    approach: string;
+    tech: string[];
+    result: string;
+    liveDemoUrl: string | null;
+  }
+> = {
+  'https://github.com/Alumsdesigns/floodsave': {
+    problem:
+      'A flood-risk prediction dashboard so people can understand which areas are at higher risk and make informed decisions before events.',
+    approach:
+      'Data-science pipeline following CRISP-DM: exploratory analysis, feature engineering and ML model training, wrapped in a narrative dashboard that walks users from problem → hypotheses → results with saved plot outputs.',
+    tech: ['Python', 'Streamlit', 'Pandas', 'Scikit-learn', 'Jupyter', 'Heroku'],
+    result: '',
+    liveDemoUrl: 'https://floodsave-bf0f49c3b6af.herokuapp.com/',
+  },
+  'https://github.com/Alumsdesigns/quiporder': {
+    problem:
+      'Manage equipment orders and workflows for occupational-therapy teams, with clear role-based access for admins, therapists and suppliers.',
+    approach:
+      'Django full-stack app with role-based dashboards and PostgreSQL persistence. Server-rendered CRUD flows, manual testing across every admin path, wireframe-first UX and deployment on Heroku.',
+    tech: ['Django', 'Python', 'PostgreSQL', 'Bootstrap', 'Heroku'],
+    result: '',
+    liveDemoUrl: 'https://quiptorder-f48affb2ee2c.herokuapp.com',
+  },
+  'https://github.com/Alumsdesigns/standup-updates-app': {
+    problem:
+      "Give teams one clean place to record daily standup updates — yesterday, today, blockers — instead of losing them in sticky notes and chat.",
+    approach:
+      'Python terminal application that captures structured updates and writes them straight to a Google Sheet via the Sheets API. Small deterministic UX, deployed on Heroku.',
+    tech: ['Python', 'Google Sheets API', 'Heroku'],
+    result: '',
+    liveDemoUrl: 'https://standup-updates-app-5910da38655e.herokuapp.com/',
+  },
+  'https://github.com/Alumsdesigns/davinaleilaniblooms': {
+    problem:
+      'A responsive brochure site for a luxury faux-flower design studio so prospective clients can browse the portfolio and make enquiries on any device.',
+    approach:
+      'Hand-crafted HTML and CSS with a mobile-first responsive layout, semantic markup and accessible navigation. Content-first design, fast load times, no unnecessary JavaScript.',
+    tech: ['HTML5', 'CSS3', 'Responsive design', 'GitHub Pages'],
+    result: '',
+    liveDemoUrl: 'https://alumsdesigns.github.io/davinaleilaniblooms/',
+  },
+  'https://github.com/Alumsdesigns/quizverse': {
+    problem:
+      'An accessible, mobile-friendly quiz web app that lets anyone test their general knowledge in a friendly single-page experience.',
+    approach:
+      'Single-page vanilla-JavaScript app with responsive CSS, keyboard-friendly controls and clean state transitions between questions and results. Deployed on GitHub Pages.',
+    tech: ['JavaScript', 'HTML5', 'CSS3', 'GitHub Pages'],
+    result: '',
+    liveDemoUrl: 'https://alumsdesigns.github.io/quizverse/',
+  },
+  'https://github.com/MarthaTaylor/fend-project-memory-game': {
+    problem:
+      'A browser memory-matching game where the player pairs 16 cards in as few moves as possible while a 3-star rating tracks their performance.',
+    approach:
+      'Vanilla JavaScript with DOM manipulation, a game timer, move counter and star-rating logic. Focused on clean event handling and responsive card animations.',
+    tech: ['JavaScript (ES6+)', 'HTML5', 'CSS3', 'Vanilla DOM'],
+    result: '',
+    liveDemoUrl: 'https://marthataylor.github.io/fend-project-memory-game/',
+  },
+  'https://github.com/MarthaTaylor/frontend-nanodegree-arcade-game': {
+    problem:
+      'A Frogger-style arcade game in the browser — cross a road of moving enemies to reach the safe water line.',
+    approach:
+      'HTML5 Canvas rendering with a game loop, class-based Player and Enemy entities, collision detection and keyboard input — a small hand-rolled engine.',
+    tech: ['JavaScript (ES6+)', 'HTML5 Canvas', 'OOP'],
+    result: '',
+    liveDemoUrl: 'https://marthataylor.github.io/frontend-nanodegree-arcade-game/',
+  },
+  'https://github.com/MarthaTaylor/frontend-nanodegree-feedreader': {
+    problem:
+      'Prove an existing RSS feed-reader app actually works — with a full unit- and integration-test suite.',
+    approach:
+      'Jasmine spec suite covering feed URL validation, feed name checks, DOM population after async fetch, and menu visibility toggling. Test-first thinking applied to a legacy codebase.',
+    tech: ['JavaScript', 'Jasmine', 'Test-driven development'],
+    result: '',
+    liveDemoUrl: null,
+  },
+  'https://github.com/MarthaTaylor/reactnd-project-myreads-starter': {
+    problem:
+      'A book-shelf app that lets you sort your reads into Currently Reading / Want to Read / Read, and search a live catalogue to add more.',
+    approach:
+      'React SPA with component-driven state, controlled inputs, debounced search against a backend API and clean shelf-to-shelf transitions. React Router for the search view.',
+    tech: ['React', 'React Router', 'JavaScript (ES6+)', 'REST API'],
+    result: '',
+    liveDemoUrl: null,
+  },
+  'https://github.com/MarthaTaylor/mws-restaurant-stage-1': {
+    problem:
+      'Convert a static restaurant-reviews site into an accessible, offline-capable Progressive Web App.',
+    approach:
+      'Service Worker caching for offline use, responsive image sets, ARIA and keyboard accessibility work, and Lighthouse-driven performance tuning against a local API server.',
+    tech: ['JavaScript', 'Service Workers', 'PWA', 'Accessibility', 'Responsive images'],
+    result: '',
+    liveDemoUrl: null,
+  },
+};
 
 export const experience = [
   {
@@ -143,3 +260,18 @@ export const awards = [
   'Google / Udacity Front-End Web Development NanoDegree — top 2% EMEA',
   'Studying towards AWS certification',
 ];
+
+// Gamification config (edit freely)
+export const achievementsList = [
+  { id: 'first-steps', title: 'First Steps', description: 'Landed on the portfolio.', xp: 5, icon: '👋' },
+  { id: 'about-reader', title: 'About Reader', description: 'Read the About section.', xp: 10, icon: '📖' },
+  { id: 'skill-scanner', title: 'Skill Scanner', description: 'Scanned the skill grid.', xp: 15, icon: '🔍' },
+  { id: 'project-explorer', title: 'Project Explorer', description: 'Explored the projects section.', xp: 20, icon: '🚀' },
+  { id: 'made-contact', title: 'Made Contact', description: 'Reached the contact section.', xp: 20, icon: '📬' },
+  { id: 'deep-diver', title: 'Deep Diver', description: 'Opened a live project demo.', xp: 10, icon: '🎯' },
+  { id: 'palette-master', title: 'Palette Master', description: 'Used the ⌘K command palette.', xp: 10, icon: '⌘' },
+  { id: 'theme-switcher', title: 'Theme Switcher', description: 'Toggled dark / light mode.', xp: 5, icon: '🌗' },
+  { id: 'konami-master', title: 'Konami Master', description: 'Entered the classic cheat code.', xp: 25, icon: '🎮' },
+];
+
+export const maxXp = achievementsList.reduce((s, a) => s + a.xp, 0);

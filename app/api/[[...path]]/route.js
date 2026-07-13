@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb'
 import { v4 as uuidv4 } from 'uuid'
 import { NextResponse } from 'next/server'
-import { otherRepos } from '@/lib/portfolio/content'
+import { otherRepos, preGeneratedSummaries } from '@/lib/portfolio/content'
 import { fetchRepo } from '@/lib/portfolio/github'
 import { summariseRepo, fallbackSummary } from '@/lib/portfolio/summarize'
 import { cacheGet, cacheSet } from '@/lib/portfolio/cache'
@@ -9,10 +9,8 @@ import { cacheGet, cacheSet } from '@/lib/portfolio/cache'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// MongoDB connection (kept from template, unused for portfolio but preserved for future features)
 let client
 let db
-
 async function connectToMongo() {
   if (!client) {
     client = new MongoClient(process.env.MONGO_URL)
@@ -43,18 +41,24 @@ async function buildRepoCard(url) {
   if (!repo) return null
 
   let summary
-  let generatedByAi = true
-  try {
-    summary = await summariseRepo(repo)
-    // If LLM returned all-empty, fall back
-    if (!summary.problem && !summary.approach && summary.tech.length === 0) {
+  let generatedByAi = false
+
+  if (preGeneratedSummaries[url]) {
+    summary = preGeneratedSummaries[url]
+    generatedByAi = false
+  } else {
+    try {
+      summary = await summariseRepo(repo)
+      generatedByAi = true
+      if (!summary.problem && !summary.approach && summary.tech.length === 0) {
+        summary = fallbackSummary(repo)
+        generatedByAi = false
+      }
+    } catch (e) {
+      console.error('LLM summarise failed for', url, e?.message || e)
       summary = fallbackSummary(repo)
       generatedByAi = false
     }
-  } catch (e) {
-    console.error('LLM summarise failed for', url, e?.message || e)
-    summary = fallbackSummary(repo)
-    generatedByAi = false
   }
 
   const card = {
@@ -75,20 +79,20 @@ async function handleRoute(request, { params }) {
   const method = request.method
 
   try {
-    // Portfolio: repos endpoint - fetch repos + LLM-summarise READMEs
     if (route === '/repos' && method === 'GET') {
       const results = await Promise.all(otherRepos.map((u) => buildRepoCard(u).catch(() => null)))
       const repos = results.filter(Boolean)
       const generatedByAi = repos.some((r) => r.generatedByAi)
-      return handleCORS(NextResponse.json({ repos, generatedByAi }))
+      const response = NextResponse.json({ repos, generatedByAi })
+      // Encourage the CDN + the browser to cache aggressively — stale-while-revalidate keeps it snappy.
+      response.headers.set('Cache-Control', 'public, max-age=1800, s-maxage=3600, stale-while-revalidate=86400')
+      return handleCORS(response)
     }
 
-    // Health
     if ((route === '/' || route === '/root') && method === 'GET') {
       return handleCORS(NextResponse.json({ message: 'ok' }))
     }
 
-    // Status endpoints (template, kept)
     if (route === '/status' && method === 'POST') {
       const dbc = await connectToMongo()
       const body = await request.json()

@@ -101,3 +101,85 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: |
+  Standout Next.js + TypeScript developer portfolio for Martha Taylor (senior full-stack engineer).
+  Reads specific GitHub repos + Martha's own repos to populate project cards (problem/approach/tech/result).
+  Two hero-featured projects: Pennylane-style transactions UI + Genkit content-scraper. Skills grouped
+  and tiered, dark/light toggle (default light), gamification (XP + achievements + Konami + ⌘K palette),
+  fully responsive, a11y-minded, fast.
+
+backend:
+  - task: "GET /api/repos returns 10 repo cards with pre-generated summaries + live-demo URLs + cache headers"
+    implemented: true
+    working: true
+    file: "/app/app/api/[[...path]]/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        -working: true
+        -agent: "main"
+        -comment: "Verified via curl: returns 10 repos, each with non-empty problem/approach/tech and live-demo URLs where available. Cache-Control header set. LLM path still wired for repos without pre-generated summaries."
+
+frontend:
+  - task: "Beautiful portfolio shell (Hero, About, Skills, Projects, Contact) with subtle motion, sticky nav, dark/light toggle"
+    implemented: true
+    working: true
+    file: "/app/app/page.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        -working: true
+        -agent: "main"
+        -comment: "Default light theme, framer-motion for tasteful entry animations, sticky backdrop-blur nav, understated-premium typography."
+  - task: "Repo cards render pre-generated summaries, no GitHub 'view code' link, live-demo link only"
+    implemented: true
+    working: true
+    file: "/app/components/portfolio/repo-card.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        -working: true
+        -agent: "main"
+        -comment: "Per user instruction: removed 'View code' GitHub link; only shows Live demo when the repo has one."
+  - task: "Gamification: XP bar in nav, achievement toasts, Konami easter egg, ⌘K command palette"
+    implemented: true
+    working: true
+    file: "/app/components/portfolio/gamification.tsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        -working: true
+        -agent: "main"
+        -comment: "IntersectionObserver-driven section achievements; localStorage persistence; sonner toasts; cmdk palette."
+  - task: "Responsive + a11y: mobile hamburger, skip-link, prefers-reduced-motion, focus-visible rings, ARIA labels, viewport meta"
+    implemented: true
+    working: true
+    file: "/app/components/portfolio/nav.tsx + /app/app/layout.js + /app/app/globals.css"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        -working: true
+        -agent: "main"
+        -comment: "Added shadcn Sheet hamburger under md breakpoint; skip-to-content link; global @media prefers-reduced-motion; MotionConfig reducedMotion='user'; scroll-margin-top for sticky-header anchor offset; preconnect/dns-prefetch to GitHub."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus: []
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    -agent: "main"
+    -message: "Phase 1 aha-moment complete. Pre-generated summaries in content.ts unblock the LLM budget cap. LLM path still wired for future repos without hand-written entries."

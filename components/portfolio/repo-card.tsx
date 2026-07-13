@@ -2,10 +2,11 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Star } from 'lucide-react';
+import { ExternalLink, Star } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useGamification } from '@/components/portfolio/gamification';
 
 export type RepoCardData = {
   name: string;
@@ -23,6 +24,8 @@ export type RepoCardData = {
 
 export function RepoCard({ data, index }: { data: RepoCardData; index: number }) {
   const { summary } = data;
+  const { unlock } = useGamification();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -76,20 +79,15 @@ export function RepoCard({ data, index }: { data: RepoCardData; index: number })
             </div>
           )}
 
-          <div className="flex flex-wrap gap-2 pt-2">
-            {summary.liveDemoUrl && (
-              <Button size="sm" variant="outline" asChild>
+          {summary.liveDemoUrl && (
+            <div className="pt-2">
+              <Button size="sm" variant="outline" asChild onClick={() => unlock('deep-diver')}>
                 <a href={summary.liveDemoUrl} target="_blank" rel="noreferrer">
                   <ExternalLink className="mr-2 h-3.5 w-3.5" /> Live demo
                 </a>
               </Button>
-            )}
-            <Button size="sm" variant="ghost" asChild>
-              <a href={data.htmlUrl} target="_blank" rel="noreferrer">
-                <Github className="mr-2 h-3.5 w-3.5" /> View code
-              </a>
-            </Button>
-          </div>
+            </div>
+          )}
         </CardContent>
       </Card>
     </motion.div>
