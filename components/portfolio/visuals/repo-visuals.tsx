@@ -45,57 +45,194 @@ function Frame({
 export function FloodsaveVisual() {
   return (
     <Frame
-      gradient="bg-gradient-to-br from-sky-100 via-cyan-50 to-blue-50 dark:from-sky-950/40 dark:via-cyan-950/30 dark:to-blue-950/40"
-      label="Flood risk"
+      gradient="bg-gradient-to-br from-sky-100 via-cyan-50 to-emerald-50 dark:from-sky-950/45 dark:via-cyan-950/30 dark:to-emerald-950/40"
+      label="Evacuation route"
       labelClass="text-sky-800 dark:text-sky-300"
     >
-      <div className="flex h-full w-full items-end gap-3">
-        {/* Chart */}
-        <svg viewBox="0 0 220 100" className="h-full flex-1">
-          <defs>
-            <linearGradient id="fArea" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="hsl(200 90% 55%)" stopOpacity="0.35" />
-              <stop offset="100%" stopColor="hsl(200 90% 55%)" stopOpacity="0" />
-            </linearGradient>
-          </defs>
+      <svg viewBox="0 0 320 180" className="h-full w-full" preserveAspectRatio="xMidYMid meet" aria-hidden>
+        <defs>
+          <linearGradient id="fs-water" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="hsl(200 90% 55%)" stopOpacity="0.85" />
+            <stop offset="100%" stopColor="hsl(210 90% 40%)" stopOpacity="0.95" />
+          </linearGradient>
+          <linearGradient id="fs-ground" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="hsl(140 40% 62%)" />
+            <stop offset="100%" stopColor="hsl(140 30% 42%)" />
+          </linearGradient>
+          <linearGradient id="fs-hill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="hsl(150 45% 55%)" />
+            <stop offset="100%" stopColor="hsl(150 40% 32%)" />
+          </linearGradient>
+          <linearGradient id="fs-path" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="hsl(45 100% 60%)" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="hsl(30 95% 55%)" stopOpacity="0.9" />
+          </linearGradient>
+          <filter id="fs-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2.2" result="b" />
+            <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+
+        {/* Sky wash */}
+        <rect x="0" y="0" width="320" height="180" fill="transparent" />
+
+        {/* Ground (rising from left, higher on right = safe terrain hill) */}
+        <path
+          d="M0,150 L110,145 L180,132 L245,110 L295,86 L320,78 L320,180 L0,180 Z"
+          fill="url(#fs-ground)"
+        />
+        {/* Hill (safe terrain) */}
+        <path
+          d="M210,180 L245,110 L280,80 L320,78 L320,180 Z"
+          fill="url(#fs-hill)"
+        />
+        {/* Small trees on hill */}
+        <g opacity="0.9">
+          <circle cx="262" cy="82" r="6" fill="hsl(140 45% 32%)" />
+          <rect x="260.5" y="86" width="3" height="6" fill="hsl(30 40% 30%)" />
+          <circle cx="290" cy="76" r="5" fill="hsl(140 45% 30%)" />
+          <rect x="288.5" y="80" width="3" height="5" fill="hsl(30 40% 30%)" />
+        </g>
+
+        {/* Safe destination flag on the hill */}
+        <g>
+          <line x1="300" y1="72" x2="300" y2="58" stroke="hsl(30 40% 20%)" strokeWidth="1.5" />
           <motion.path
-            initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 1 }}
+            initial={{ opacity: 0, scale: 0.6 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.1, ease: 'easeInOut' }}
-            d="M0,80 L40,70 L70,60 L100,62 L130,40 L170,28 L220,15"
-            fill="none"
-            stroke="hsl(200 90% 40%)"
-            strokeWidth="2"
-            strokeLinecap="round"
+            transition={{ delay: 0.3, duration: 0.4 }}
+            d="M300,58 L316,62 L300,66 Z"
+            fill="hsl(0 80% 55%)"
           />
+        </g>
+
+        {/* Highlighted evacuation path (dashed, animated) */}
+        <motion.path
+          initial={{ pathLength: 0, opacity: 0 }}
+          whileInView={{ pathLength: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.4, ease: 'easeInOut', delay: 0.2 }}
+          d="M40,148 C90,146 130,140 170,128 C205,118 240,102 285,80"
+          fill="none"
+          stroke="url(#fs-path)"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeDasharray="6 5"
+          filter="url(#fs-glow)"
+        />
+
+        {/* Flood water sweeping in from the left (rises + moves right) */}
+        <motion.g
+          initial={{ x: -80, opacity: 0.6 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <path
+            d="M-20,180 L-20,150 C10,142 40,155 80,148 C110,142 130,155 160,150 L160,180 Z"
+            fill="url(#fs-water)"
+            opacity="0.85"
+          />
+          {/* Wave crest */}
           <motion.path
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            whileInView={{ opacity: 0.9 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-            d="M0,80 L40,70 L70,60 L100,62 L130,40 L170,28 L220,15 L220,100 L0,100 Z"
-            fill="url(#fArea)"
+            transition={{ delay: 0.4 }}
+            d="M-10,150 C20,142 45,158 80,150 C110,143 130,157 158,152"
+            fill="none"
+            stroke="white"
+            strokeOpacity="0.7"
+            strokeWidth="1.4"
           />
-          {[[40,70],[100,62],[130,40],[170,28]].map(([cx,cy],i)=>(
-            <motion.circle key={i} initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.7 + i*0.1 }} cx={cx} cy={cy} r="2.5" fill="hsl(200 90% 40%)" />
-          ))}
-        </svg>
-
-        {/* Gauge */}
-        <div className="flex h-full flex-col items-center justify-end pb-1">
-          <div className="relative h-full w-3 overflow-hidden rounded-full bg-sky-200/70 dark:bg-sky-900/60">
-            <motion.div
-              initial={{ height: '15%' }}
-              whileInView={{ height: '78%' }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.1, ease: 'easeOut' }}
-              className="absolute bottom-0 w-full bg-gradient-to-t from-sky-600 via-sky-500 to-cyan-400"
+          {/* Splash droplets */}
+          {[
+            { cx: 60, cy: 138 },
+            { cx: 95, cy: 132 },
+            { cx: 130, cy: 138 },
+          ].map((d, i) => (
+            <motion.circle
+              key={i}
+              cx={d.cx}
+              cy={d.cy}
+              r="1.6"
+              fill="hsl(200 90% 80%)"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: [0, 1, 0], y: [6, -4, 6] }}
+              transition={{ duration: 1.8, repeat: Infinity, delay: 0.6 + i * 0.25, ease: 'easeInOut' }}
             />
-          </div>
-          <Droplets className="mt-1 h-3 w-3 text-sky-700 dark:text-sky-300" />
-        </div>
-      </div>
+          ))}
+        </motion.g>
+
+        {/* Pedestrian icon (person walking) moving up the path on foot */}
+        <motion.g
+          initial={{ offsetDistance: '10%', opacity: 0 }}
+          whileInView={{ offsetDistance: '85%', opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 3.4, ease: 'easeInOut', delay: 0.5 }}
+          style={{
+            offsetPath: 'path("M40,148 C90,146 130,140 170,128 C205,118 240,102 285,80")',
+            offsetRotate: '0deg',
+          } as React.CSSProperties}
+        >
+          {/* Head */}
+          <circle cx="0" cy="-11" r="3" fill="hsl(30 55% 45%)" />
+          {/* Body */}
+          <rect x="-2" y="-8" width="4" height="7" rx="1.2" fill="hsl(210 65% 45%)" />
+          {/* Legs */}
+          <motion.line
+            x1="0" y1="-1" x2="-2" y2="4"
+            stroke="hsl(210 65% 30%)" strokeWidth="1.4" strokeLinecap="round"
+            animate={{ rotate: [15, -15, 15] }}
+            style={{ originX: '0px', originY: '-1px' }}
+            transition={{ duration: 0.5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <motion.line
+            x1="0" y1="-1" x2="2" y2="4"
+            stroke="hsl(210 65% 30%)" strokeWidth="1.4" strokeLinecap="round"
+            animate={{ rotate: [-15, 15, -15] }}
+            style={{ originX: '0px', originY: '-1px' }}
+            transition={{ duration: 0.5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </motion.g>
+
+        {/* Car moving up the path (a bit ahead of the pedestrian) */}
+        <motion.g
+          initial={{ offsetDistance: '35%', opacity: 0 }}
+          whileInView={{ offsetDistance: '95%', opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 3.0, ease: 'easeInOut', delay: 0.4 }}
+          style={{
+            offsetPath: 'path("M40,148 C90,146 130,140 170,128 C205,118 240,102 285,80")',
+            offsetRotate: '0deg',
+          } as React.CSSProperties}
+        >
+          {/* Car body */}
+          <rect x="-8" y="-6" width="16" height="6" rx="1.5" fill="hsl(0 75% 55%)" />
+          {/* Car roof */}
+          <rect x="-5" y="-9" width="9" height="3.5" rx="1" fill="hsl(0 75% 45%)" />
+          {/* Windows */}
+          <rect x="-4" y="-8.5" width="3.5" height="2.5" rx="0.4" fill="hsl(200 80% 85%)" opacity="0.9" />
+          <rect x="0.2" y="-8.5" width="3.5" height="2.5" rx="0.4" fill="hsl(200 80% 85%)" opacity="0.9" />
+          {/* Wheels */}
+          <circle cx="-5" cy="0.5" r="1.8" fill="#111" />
+          <circle cx="5" cy="0.5" r="1.8" fill="#111" />
+          {/* Headlight glow (forward) */}
+          <circle cx="8" cy="-3" r="1.2" fill="hsl(50 100% 75%)" opacity="0.9" />
+        </motion.g>
+
+        {/* Legend chips */}
+        <g fontFamily="ui-sans-serif, system-ui" fontSize="7" fill="currentColor">
+          <g transform="translate(8,10)">
+            <rect x="0" y="0" width="76" height="12" rx="6" fill="hsl(0 0% 100% / 0.85)" stroke="hsl(0 0% 0% / 0.06)" />
+            <circle cx="6" cy="6" r="2.4" fill="hsl(210 65% 45%)" />
+            <text x="12" y="8.5" fill="hsl(220 25% 20%)">On foot</text>
+            <circle cx="42" cy="6" r="2.4" fill="hsl(0 75% 55%)" />
+            <text x="48" y="8.5" fill="hsl(220 25% 20%)">By car</text>
+          </g>
+        </g>
+      </svg>
     </Frame>
   );
 }
