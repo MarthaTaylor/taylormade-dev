@@ -15,7 +15,7 @@ export const person = {
 };
 
 export const about = [
-  "I'm a senior full-stack engineer with 7+ years shipping product across enterprise retail, healthcare SaaS and automotive platform engineering. Frontend craft is my day-to-day: I care about the details users feel and the ones they don't.",
+  "I'm a senior full-stack engineer with 7+ years shipping product across enterprise retail, healthcare SaaS and automotive platform engineering. My focus sits across the whole stack these days \u2014 building the product on top, keeping the platform, CI/CD, security and DevSecOps healthy underneath, and leaning on AI where it earns its keep.",
   "How I work: secure by default, ship little and often, test-backed. I like small clean interfaces, typed contracts end-to-end, and infrastructure that reads like documentation. I lean into least-privilege IAM, OWASP-minded reviews and CI/CD that catches problems before humans do.",
 ];
 
