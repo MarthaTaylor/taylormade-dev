@@ -5,12 +5,12 @@ export const person = {
   name: 'Martha Taylor',
   role: 'Senior Full-Stack Engineer',
   tagline:
-    'Senior full-stack engineer. Platform, CI/CD, security & DevSecOps focus \u2014 with AI woven in where it earns its keep.',
+    'Senior full-stack engineer. Platform, CI/CD, security & DevSecOps focus — with AI woven in where it earns its keep.',
   location: 'United Kingdom',
   email: 'hello@marthataylor.dev',
   github: 'https://github.com/MarthaTaylor',
-  linkedin: 'https://www.linkedin.com/in/martha-taylor', // TODO: replace with your real LinkedIn URL
-  cvUrl: '#', // TODO: attach CV and set the URL
+  linkedin: 'https://www.linkedin.com/in/martha-taylor',
+  cvUrl: '#',
   githubHandle: 'MarthaTaylor',
 };
 
@@ -23,16 +23,7 @@ export const skillGroups = [
   {
     title: 'Core',
     tier: 'primary',
-    items: [
-      'React',
-      'Next.js',
-      'TypeScript',
-      'JavaScript',
-      'ES6+ / ECMAScript',
-      'Node.js',
-      'Python / FastAPI',
-      'PostgreSQL',
-    ],
+    items: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'ES6+ / ECMAScript', 'Node.js', 'Python / FastAPI', 'PostgreSQL'],
   },
   {
     title: 'Platform',
@@ -65,7 +56,7 @@ export const heroProjects = [
     problem:
       "Build a production-grade transactions interface that stays responsive with thousands of rows, supports server-driven filtering and pagination, and demonstrates the component patterns you'd actually put into a real product.",
     approach:
-      "Server-driven pagination and filtering wired through React Query so cache, invalidation and refetching are honest. A typed API layer with Zod schemas that double as form validation. Composable table architecture that separates data hooks from presentation, so the table is dumb and the state is reusable. Controlled forms with react-hook-form + Zod, URL as the source of truth for filters (deep-linkable), optimistic updates on mutations, and accessible focus / keyboard / skeleton loading states throughout.",
+      'Server-driven pagination and filtering wired through React Query so cache, invalidation and refetching are honest. A typed API layer with Zod schemas that double as form validation. Composable table architecture that separates data hooks from presentation, so the table is dumb and the state is reusable. Controlled forms with react-hook-form + Zod, URL as the source of truth for filters (deep-linkable), optimistic updates on mutations, and accessible focus / keyboard / skeleton loading states throughout.',
     decisions: [
       'URL as canonical filter state instead of local component state — pages are deep-linkable and back/forward feels natural.',
       'Headless data hooks + presentational components — the table is trivial to reuse and easy to test.',
@@ -107,13 +98,85 @@ export const heroProjects = [
   },
 ];
 
-// Repos rendered as "Other projects" cards. Order matters.
+// Client / product work — real projects from the CV, described generically.
+export type ClientProject = {
+  id: string;
+  name: string;
+  tagline: string;
+  problem: string;
+  approach: string;
+  tech: string[];
+  liveUrl: string | null;
+  visualId: string;
+};
+
+export const clientProjects: ClientProject[] = [
+  {
+    id: 'pivotal',
+    name: 'Pivotal — Car Subscription Platform',
+    tagline: 'Premium SUV subscription with everything bundled in one monthly payment.',
+    problem:
+      'A flexible alternative to leasing and ownership for premium SUVs — one monthly subscription that bundles insurance, road tax, servicing, home delivery and pause/resume, all under a single account.',
+    approach:
+      'Contributed to the platform engineering behind the product: reusable golden-path templates on GKE, secure IAM defaults, policy-as-code in Backstage, and DevSecOps CI/CD quality gates (SAST, dependency and container scanning) so feature teams could ship safely and fast without owning the plumbing.',
+    tech: ['React', 'Node.js', 'Python', 'Go', 'GKE', 'GCP', 'Backstage', 'Terraform', 'CI/CD'],
+    liveUrl: 'https://www.drivepivotal.com/',
+    visualId: 'pivotal',
+  },
+  {
+    id: 'clinical-call-summariser',
+    name: 'Clinical Call Summariser',
+    tagline: "AI-assisted summaries that cut clinicians' documentation time.",
+    problem:
+      'Clinical calls take real minutes to type up afterwards. Give clinicians a reliable AI-generated draft summary so documentation stops eating the day — and stays verifiable end-to-end.',
+    approach:
+      'Built the feature end-to-end: an LLM workflow that turns a call transcript into a structured, schema-shaped summary, wired into a Next.js + NestJS + GraphQL app. Focused on output reliability, validation on the LLM edges, and test coverage of the failure modes so clinicians can trust and edit rather than start from scratch.',
+    tech: ['LLM workflows', 'Next.js', 'NestJS', 'GraphQL', 'TypeScript', 'Prompt design'],
+    liveUrl: null,
+    visualId: 'clinical',
+  },
+  {
+    id: 'prescriptions-service',
+    name: 'Prescriptions Service',
+    tagline: 'Event-driven service powering real-time prescription workflows.',
+    problem:
+      'Prescription workflows need real-time cross-service coordination — dispatch, notifications, records — without services becoming tightly coupled or silently divergent.',
+    approach:
+      'Designed and delivered an event-driven service with DDD boundaries: aggregates for prescription lifecycle, domain events published on state change, and downstream consumers for dispatch / notification / audit. Next.js + NestJS + GraphQL on top; secure-by-default auth, audit trails and OWASP-aligned API patterns underneath.',
+    tech: ['Next.js', 'NestJS', 'GraphQL', 'DDD', 'Event-driven', 'OAuth', 'OWASP'],
+    liveUrl: null,
+    visualId: 'eventdriven',
+  },
+  {
+    id: 'golden-path-templates',
+    name: 'Golden-Path Platform Templates',
+    tagline: '25+ reusable templates that cut new-service setup from days to minutes.',
+    problem:
+      'Every new service was reinventing scaffolding — CI/CD, IAM, monitoring, secrets, deployment — burning senior time and leaking security drift.',
+    approach:
+      'Delivered 25+ reusable Backstage golden-path templates for React, Node, Python and Go apps on GKE. Each template ships with IAM least-privilege, secrets wiring, observability, CI/CD and DevSecOps quality gates already plumbed in. Automated GCP workflows around Pub/Sub and BigQuery so teams get a production-shaped repo in minutes.',
+    tech: ['Backstage', 'GKE', 'GCP', 'Terraform', 'React', 'Node.js', 'Python', 'Go', 'Pub/Sub', 'BigQuery'],
+    liveUrl: null,
+    visualId: 'goldenpath',
+  },
+  {
+    id: 'devsecops-cicd',
+    name: 'DevSecOps CI/CD Quality Gates',
+    tagline: 'Security scanning + quality gates baked into every pipeline.',
+    problem:
+      'Security reviews were manual, slow and inconsistent across teams. Vulnerabilities were caught late — often after merge — and IAM drift crept in unnoticed.',
+    approach:
+      'Introduced automated DevSecOps scanning as a first-class CI stage: Semgrep for SAST, Snyk for dependency risk, Trivy for container scanning, SonarQube for code quality, Cypress for end-to-end. Failing gates block promotion; policy-as-code enforces least-privilege IAM. Security review shifted from a bottleneck to a background check.',
+    tech: ['Semgrep', 'SonarQube', 'Trivy', 'Snyk', 'Cypress', 'CI/CD', 'Policy-as-code'],
+    liveUrl: null,
+    visualId: 'devsecops',
+  },
+];
+
 export const otherRepos = [
-  // Product / side-project work
   'https://github.com/Alumsdesigns/floodsave',
   'https://github.com/Alumsdesigns/standup-updates-app',
   'https://github.com/Alumsdesigns/quizverse',
-  // Frontend foundation work from the Google/Udacity NanoDegree
   'https://github.com/MarthaTaylor/fend-project-memory-game',
   'https://github.com/MarthaTaylor/frontend-nanodegree-arcade-game',
   'https://github.com/MarthaTaylor/frontend-nanodegree-feedreader',
@@ -142,7 +205,7 @@ export const preGeneratedSummaries: Record<
   },
   'https://github.com/Alumsdesigns/standup-updates-app': {
     problem:
-      "Give teams one clean place to record daily standup updates — yesterday, today, blockers — instead of losing them in sticky notes and chat.",
+      'Give teams one clean place to record daily standup updates — yesterday, today, blockers — instead of losing them in sticky notes and chat.',
     approach:
       'Python terminal application that captures structured updates and writes them straight to a Google Sheet via the Sheets API. Small deterministic UX, deployed on Heroku.',
     tech: ['Python', 'Google Sheets API', 'Heroku'],
@@ -238,15 +301,15 @@ export const awards = [
 ];
 
 export const achievementsList = [
-  { id: 'first-steps', title: 'First Steps', description: 'Landed on the portfolio.', xp: 5, icon: '👋' },
-  { id: 'about-reader', title: 'About Reader', description: 'Read the About section.', xp: 10, icon: '📖' },
-  { id: 'skill-scanner', title: 'Skill Scanner', description: 'Scanned the skill grid.', xp: 15, icon: '🔍' },
-  { id: 'project-explorer', title: 'Project Explorer', description: 'Explored the projects section.', xp: 20, icon: '🚀' },
-  { id: 'made-contact', title: 'Made Contact', description: 'Reached the contact section.', xp: 20, icon: '📬' },
-  { id: 'deep-diver', title: 'Deep Diver', description: 'Opened a live project demo.', xp: 10, icon: '🎯' },
-  { id: 'palette-master', title: 'Palette Master', description: 'Used the ⌘K command palette.', xp: 10, icon: '⌘' },
-  { id: 'theme-switcher', title: 'Theme Switcher', description: 'Toggled dark / light mode.', xp: 5, icon: '🌗' },
-  { id: 'konami-master', title: 'Konami Master', description: 'Entered the classic cheat code.', xp: 25, icon: '🎮' },
+  { id: 'first-steps',     title: 'First Steps',     description: 'Landed on the portfolio.',            xp: 5,  icon: '👋' },
+  { id: 'about-reader',    title: 'About Reader',    description: 'Read the About section.',            xp: 10, icon: '📖' },
+  { id: 'skill-scanner',   title: 'Skill Scanner',   description: 'Scanned the skill grid.',            xp: 15, icon: '🔍' },
+  { id: 'project-explorer',title: 'Project Explorer',description: 'Explored the projects section.',    xp: 20, icon: '🚀' },
+  { id: 'made-contact',    title: 'Made Contact',    description: 'Reached the contact section.',      xp: 20, icon: '📬' },
+  { id: 'deep-diver',      title: 'Deep Diver',      description: 'Opened a live project demo.',        xp: 10, icon: '🎯' },
+  { id: 'palette-master',  title: 'Palette Master',  description: 'Used the ⌘K command palette.',       xp: 10, icon: '⌘' },
+  { id: 'theme-switcher',  title: 'Theme Switcher',  description: 'Toggled dark / light mode.',         xp: 5,  icon: '🌗' },
+  { id: 'konami-master',   title: 'Konami Master',   description: 'Entered the classic cheat code.',    xp: 25, icon: '🎮' },
 ];
 
 export const maxXp = achievementsList.reduce((s, a) => s + a.xp, 0);

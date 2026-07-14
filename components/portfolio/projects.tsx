@@ -4,8 +4,9 @@ import * as React from 'react';
 import useSWR from 'swr';
 import { HeroProject } from './hero-project';
 import { RepoCard, type RepoCardData } from './repo-card';
+import { ClientProjectCard } from './client-project-card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { heroProjects } from '@/lib/portfolio/content';
+import { heroProjects, clientProjects } from '@/lib/portfolio/content';
 import { AlertCircle, Sparkles } from 'lucide-react';
 import { SectionAchievement } from '@/components/portfolio/gamification';
 
@@ -31,12 +32,31 @@ export function Projects() {
           </div>
         </div>
 
+        {/* Hero featured projects */}
         <div className="space-y-8">
           {heroProjects.map((p, i) => (
             <HeroProject key={p.id} project={p} index={i} />
           ))}
         </div>
 
+        {/* Client & product work */}
+        <div className="mt-16">
+          <div className="mb-6 flex items-baseline justify-between gap-3">
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+              Client &amp; product work
+            </h3>
+            <span className="hidden text-[11px] text-muted-foreground md:inline">
+              Real-world work described generically
+            </span>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {clientProjects.map((p, i) => (
+              <ClientProjectCard key={p.id} project={p} index={i} />
+            ))}
+          </div>
+        </div>
+
+        {/* Other projects (GitHub) */}
         <div className="mt-16">
           <h3 className="mb-6 text-sm font-semibold uppercase tracking-widest text-muted-foreground">
             Other projects
