@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Building2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -22,7 +22,6 @@ export function ClientProjectCard({ project, index }: { project: ClientProject; 
       className="h-full"
     >
       <Card className="group flex h-full flex-col overflow-hidden border-border/70 transition-colors hover:border-foreground/30">
-        {/* Visual cover */}
         <div
           className="relative aspect-[16/9] w-full border-b border-border/60"
           role="img"
@@ -34,7 +33,13 @@ export function ClientProjectCard({ project, index }: { project: ClientProject; 
         <CardContent className="flex flex-1 flex-col gap-4 p-6">
           <div>
             <h4 className="text-[17px] font-semibold tracking-tight">{project.name}</h4>
-            <p className="mt-0.5 text-[13px] text-muted-foreground">{project.tagline}</p>
+            {project.company && (
+              <p className="mt-1 inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
+                <Building2 className="h-3 w-3" aria-hidden />
+                {project.company}
+              </p>
+            )}
+            <p className="mt-1.5 text-[13px] text-muted-foreground">{project.tagline}</p>
           </div>
 
           <div>

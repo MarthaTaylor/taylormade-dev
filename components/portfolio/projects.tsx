@@ -56,7 +56,7 @@ export function Projects() {
           </div>
         </div>
 
-        {/* Other projects (GitHub) */}
+        {/* Other projects (GitHub) \u2014 split by theme */}
         <div className="mt-16">
           <h3 className="mb-6 text-sm font-semibold uppercase tracking-widest text-muted-foreground">
             Other projects
@@ -89,13 +89,54 @@ export function Projects() {
             </div>
           )}
 
-          {data?.repos && data.repos.length > 0 && (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {data.repos.map((repo, i) => (
-                <RepoCard key={repo.htmlUrl} data={repo} index={i} />
-              ))}
-            </div>
-          )}
+          {data?.repos && data.repos.length > 0 && (() => {
+            const gameNames = new Set([
+              'quizverse',
+              'fend-project-memory-game',
+              'frontend-nanodegree-arcade-game',
+            ]);
+            const games = data.repos.filter((r) => gameNames.has(r.name));
+            const commercial = data.repos.filter((r) => !gameNames.has(r.name));
+            return (
+              <div className="space-y-10">
+                {commercial.length > 0 && (
+                  <div>
+                    <div className="mb-4 flex items-baseline justify-between gap-3">
+                      <h4 className="text-[13px] font-semibold uppercase tracking-widest text-foreground/80">
+                        Commercial &amp; business
+                      </h4>
+                      <span className="hidden text-[11px] text-muted-foreground md:inline">
+                        Utilities, tools and product experiments
+                      </span>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                      {commercial.map((repo, i) => (
+                        <RepoCard key={repo.htmlUrl} data={repo} index={i} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {games.length > 0 && (
+                  <div>
+                    <div className="mb-4 flex items-baseline justify-between gap-3">
+                      <h4 className="text-[13px] font-semibold uppercase tracking-widest text-foreground/80">
+                        Games
+                      </h4>
+                      <span className="hidden text-[11px] text-muted-foreground md:inline">
+                        Play-in-browser projects &mdash; frontend craft on lower stakes
+                      </span>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                      {games.map((repo, i) => (
+                        <RepoCard key={repo.htmlUrl} data={repo} index={i} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })()}
         </div>
       </section>
     </SectionAchievement>
