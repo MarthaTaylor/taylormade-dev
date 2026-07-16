@@ -1,68 +1,166 @@
 import Link from 'next/link';
-import { ArrowLeft, Download, FileText } from 'lucide-react';
+import { notFound } from 'next/navigation';
+import { ArrowLeft, Download, Mail, Linkedin, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { cvs, person } from '@/lib/portfolio/content';
+import { cvsFull, cvVariants } from '@/lib/portfolio/cv-content';
+import { person } from '@/lib/portfolio/content';
 
 export const metadata = {
   title: 'CV — Martha Taylor',
-  description: 'Download Martha Taylor\'s CV — pick the version that best fits your role.',
 };
 
 export default function CvPage() {
+  const cv = cvsFull[0]; // Default to the DevSecOps / CI-CD / Platform variant
+  if (!cv) notFound();
+
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="container mx-auto max-w-4xl px-6 py-16 md:py-24">
-        <Button variant="ghost" size="sm" asChild className="mb-8">
-          <Link href="/">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to portfolio
-          </Link>
-        </Button>
-
-        <div>
-          <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-            CV downloads
-          </p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
-            {person.name}&apos;s CV
-          </h1>
-          <p className="mt-3 max-w-2xl text-[15px] text-muted-foreground md:text-base">
-            A few tuned versions — same person, different lens. Pick the one closest to the role
-            you&apos;re hiring for.
-          </p>
+      <div className="container mx-auto max-w-4xl px-6 py-10 md:py-14">
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/">
+              <ArrowLeft className="mr-2 h-4 w-4" /> Back to portfolio
+            </Link>
+          </Button>
+          <Button asChild>
+            <a href={cv.downloadUrl} target="_blank" rel="noreferrer" download>
+              <Download className="mr-2 h-4 w-4" /> Download ({cv.downloadFormat})
+            </a>
+          </Button>
         </div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {cvs.map((cv) => (
-            <Card key={cv.id} className="flex h-full flex-col border-border/70">
-              <CardContent className="flex flex-1 flex-col gap-4 p-6">
-                <div className="flex items-center justify-between">
-                  <FileText className="h-5 w-5 text-muted-foreground" />
-                  <Badge variant="secondary" className="rounded-full text-[11px]">{cv.format}</Badge>
-                </div>
-                <div>
-                  <h2 className="text-lg font-semibold tracking-tight">{cv.title}</h2>
-                  <p className="mt-0.5 text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
-                    {cv.tag}
-                  </p>
-                </div>
-                <p className="text-[15px] leading-relaxed text-foreground/90">{cv.description}</p>
-                <div className="mt-auto pt-2">
-                  <Button asChild className="w-full">
-                    <a href={cv.url} target="_blank" rel="noreferrer" download>
-                      <Download className="mr-2 h-4 w-4" /> Download
-                    </a>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+        {/* Variant switcher */}
+        <div className="mb-8 flex flex-wrap gap-2">
+          {cvVariants.map((v) => (
+            <Badge
+              key={v.id}
+              variant={v.id === cv.id ? 'default' : 'secondary'}
+              className="rounded-full px-3 py-1 text-[12px] font-medium"
+            >
+              {v.label}
+              {v.id !== cv.id && (
+                <a
+                  href={v.downloadUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  download
+                  className="ml-2 underline underline-offset-2"
+                >
+                  ({v.format})
+                </a>
+              )}
+            </Badge>
           ))}
         </div>
 
-        <p className="mt-12 text-xs text-muted-foreground">
-          Prefer LinkedIn? <a href={person.linkedin} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-foreground">Reach me here</a>.
-        </p>
+        {/* Header */}
+        <header className="border-b border-border/70 pb-6">
+          <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">{person.name.toUpperCase()}</h1>
+          <p className="mt-1 text-[15px] text-muted-foreground md:text-base">{cv.headline}</p>
+          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-muted-foreground">
+            <span>UK remote-first, open to hybrid</span>
+            <span aria-hidden>&middot;</span>
+            <a href={person.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-foreground">
+              <Linkedin className="h-3.5 w-3.5" /> LinkedIn
+            </a>
+            <a href={`mailto:${person.email}`} className="inline-flex items-center gap-1 hover:text-foreground">
+              <Mail className="h-3.5 w-3.5" /> Email
+            </a>
+            <Link href="/" className="inline-flex items-center gap-1 hover:text-foreground">
+              <Globe className="h-3.5 w-3.5" /> Portfolio
+            </Link>
+          </div>
+        </header>
+
+        {/* Summary */}
+        <section className="mt-8">
+          <h2 className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+            Professional summary
+          </h2>
+          <p className="mt-2 text-[15px] leading-relaxed text-foreground/95 md:text-[16px]">
+            {cv.summary}
+          </p>
+        </section>
+
+        {/* Skills */}
+        <section className="mt-10">
+          <h2 className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+            Core skills
+          </h2>
+          <div className="mt-3 space-y-3">
+            {cv.skills.map((g) => (
+              <div key={g.title} className="grid gap-1 md:grid-cols-[200px_1fr] md:gap-4">
+                <div className="text-[13px] font-semibold">{g.title}</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {g.items.map((s) => (
+                    <Badge key={s} variant="secondary" className="rounded-full text-[11px] font-normal">
+                      {s}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Experience */}
+        <section className="mt-10">
+          <h2 className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+            Experience
+          </h2>
+          <div className="mt-4 space-y-8">
+            {cv.experience.map((role, i) => (
+              <div key={i} className="grid gap-2 md:grid-cols-[220px_1fr] md:gap-6">
+                <div className="text-[13px] text-muted-foreground">
+                  <div className="font-semibold text-foreground">{role.company}</div>
+                  <div>{role.period}</div>
+                  <div>{role.location}</div>
+                  {role.context && <div className="mt-1 text-[12px] italic">{role.context}</div>}
+                </div>
+                <div>
+                  <div className="text-[14px] font-medium">{role.role}</div>
+                  <ul className="mt-2 space-y-1.5 text-[14px] leading-relaxed text-foreground/95">
+                    {role.bullets.map((b, j) => (
+                      <li key={j} className="flex gap-2">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground/60" />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Education */}
+        <section className="mt-10">
+          <h2 className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+            Education &amp; certification
+          </h2>
+          <ul className="mt-2 space-y-1.5 text-[14px] leading-relaxed text-foreground/95">
+            {cv.education.map((e, i) => (
+              <li key={i} className="flex gap-2">
+                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground/60" />
+                <span>{e}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <div className="mt-12 flex flex-wrap items-center gap-3 border-t border-border/60 pt-6">
+          <Button asChild>
+            <a href={cv.downloadUrl} target="_blank" rel="noreferrer" download>
+              <Download className="mr-2 h-4 w-4" /> Download this CV ({cv.downloadFormat})
+            </a>
+          </Button>
+          <Button variant="outline" asChild>
+            <a href={person.linkedin} target="_blank" rel="noreferrer">
+              <Linkedin className="mr-2 h-4 w-4" /> Reach me on LinkedIn
+            </a>
+          </Button>
+        </div>
       </div>
     </div>
   );

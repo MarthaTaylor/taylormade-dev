@@ -61,7 +61,19 @@ export const skillGroups = [
   {
     title: 'Security & DevSecOps',
     tier: 'secondary',
-    items: ['OAuth', 'RBAC', 'OWASP', 'IAM least-privilege', 'Threat modelling', 'DevSecOps'],
+    items: [
+      'OAuth',
+      'RBAC',
+      'OWASP',
+      'IAM least-privilege',
+      'Threat modelling',
+      'SAST · DAST',
+      'Snyk',
+      'Semgrep',
+      'Trivy',
+      'Dependabot',
+      'SonarQube',
+    ],
   },
   {
     title: 'Cloud',

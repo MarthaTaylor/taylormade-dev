@@ -3,6 +3,7 @@ import { Hero } from '@/components/portfolio/hero';
 import { About } from '@/components/portfolio/about';
 import { Skills } from '@/components/portfolio/skills';
 import { Projects } from '@/components/portfolio/projects';
+import { Experience } from '@/components/portfolio/experience';
 import { Contact } from '@/components/portfolio/contact';
 import { GamificationProvider } from '@/components/portfolio/gamification';
 
@@ -16,6 +17,7 @@ export default function Page() {
           <About />
           <Skills />
           <Projects />
+          <Experience />
           <Contact />
         </main>
       </div>
