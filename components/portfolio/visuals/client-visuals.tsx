@@ -49,7 +49,7 @@ export function PivotalVisual() {
       label="Pivotal"
       labelClass="text-neutral-300"
     >
-      <div className="relative flex h-full w-full items-center justify-center">
+      <div className="relative flex h-full w-full items-stretch gap-3 pl-1 pr-2">
         {/* Warm rim lighting */}
         <div
           aria-hidden
@@ -61,138 +61,136 @@ export function PivotalVisual() {
           className="pointer-events-none absolute inset-x-6 bottom-8 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
         />
 
-        {/* Detailed SUV silhouette */}
-        <motion.svg
-          viewBox="0 0 260 110"
-          className="relative z-10 h-full w-[260px] drop-shadow-[0_18px_18px_rgba(0,0,0,0.55)]"
-          initial={{ opacity: 0, x: -18 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          aria-hidden
-        >
-          <defs>
-            <linearGradient id="pv-body" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#2f363d" />
-              <stop offset="55%" stopColor="#191d22" />
-              <stop offset="100%" stopColor="#0a0c10" />
-            </linearGradient>
-            <linearGradient id="pv-roof" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#3a4048" />
-              <stop offset="100%" stopColor="#1a1e24" />
-            </linearGradient>
-            <linearGradient id="pv-window" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#0f1216" />
-              <stop offset="100%" stopColor="#05070a" />
-            </linearGradient>
-            <radialGradient id="pv-shadow" cx="0.5" cy="0.5" r="0.5">
-              <stop offset="0%" stopColor="#000" stopOpacity="0.7" />
-              <stop offset="100%" stopColor="#000" stopOpacity="0" />
-            </radialGradient>
-            <radialGradient id="pv-head" cx="0.5" cy="0.5" r="0.5">
-              <stop offset="0%" stopColor="hsl(45 100% 82%)" stopOpacity="0.95" />
-              <stop offset="60%" stopColor="hsl(38 100% 65%)" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="hsl(38 100% 65%)" stopOpacity="0" />
-            </radialGradient>
-          </defs>
+        {/* LEFT: Detailed SUV silhouette */}
+        <div className="relative z-10 flex min-w-0 flex-1 flex-col items-center justify-center">
+          <motion.svg
+            viewBox="0 0 260 110"
+            className="w-full max-w-[210px] drop-shadow-[0_18px_18px_rgba(0,0,0,0.55)]"
+            initial={{ opacity: 0, x: -14 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            aria-hidden
+          >
+            <defs>
+              <linearGradient id="pv-body" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#2f363d" />
+                <stop offset="55%" stopColor="#191d22" />
+                <stop offset="100%" stopColor="#0a0c10" />
+              </linearGradient>
+              <linearGradient id="pv-roof" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#3a4048" />
+                <stop offset="100%" stopColor="#1a1e24" />
+              </linearGradient>
+              <linearGradient id="pv-window" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#0f1216" />
+                <stop offset="100%" stopColor="#05070a" />
+              </linearGradient>
+              <radialGradient id="pv-shadow" cx="0.5" cy="0.5" r="0.5">
+                <stop offset="0%" stopColor="#000" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#000" stopOpacity="0" />
+              </radialGradient>
+              <radialGradient id="pv-head" cx="0.5" cy="0.5" r="0.5">
+                <stop offset="0%" stopColor="hsl(45 100% 82%)" stopOpacity="0.95" />
+                <stop offset="60%" stopColor="hsl(38 100% 65%)" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="hsl(38 100% 65%)" stopOpacity="0" />
+              </radialGradient>
+            </defs>
 
-          {/* Ground shadow */}
-          <ellipse cx="130" cy="98" rx="112" ry="5" fill="url(#pv-shadow)" opacity="0.65" />
+            <ellipse cx="130" cy="98" rx="112" ry="5" fill="url(#pv-shadow)" opacity="0.65" />
 
-          {/* Body */}
-          <path
-            d="M18,76 C20,64 30,56 44,54 L78,48 C100,44 122,42 152,42 L188,42 C214,44 230,50 240,56 L248,60 C250,62 250,66 248,70 L246,76 L232,78 L228,76 L184,76 L180,78 L94,78 L90,76 L40,76 L36,78 L22,76 Z"
-            fill="url(#pv-body)"
-          />
+            <path
+              d="M18,76 C20,64 30,56 44,54 L78,48 C100,44 122,42 152,42 L188,42 C214,44 230,50 240,56 L248,60 C250,62 250,66 248,70 L246,76 L232,78 L228,76 L184,76 L180,78 L94,78 L90,76 L40,76 L36,78 L22,76 Z"
+              fill="url(#pv-body)"
+            />
 
-          {/* Roof structure */}
-          <path d="M62,54 L78,34 L182,34 L206,54 Z" fill="url(#pv-roof)" />
+            <path d="M62,54 L78,34 L182,34 L206,54 Z" fill="url(#pv-roof)" />
+            <line x1="62" y1="54" x2="206" y2="54" stroke="#c9cbcd" strokeWidth="0.4" opacity="0.55" />
 
-          {/* Chrome trim on top of windows */}
-          <line x1="62" y1="54" x2="206" y2="54" stroke="#c9cbcd" strokeWidth="0.4" opacity="0.55" />
+            <path d="M68,52 L82,36 L118,36 L118,52 Z" fill="url(#pv-window)" />
+            <path d="M122,52 L122,36 L180,36 L202,52 Z" fill="url(#pv-window)" />
+            <rect x="119" y="36" width="2" height="16" fill="#050709" />
 
-          {/* Windows tinted */}
-          <path d="M68,52 L82,36 L118,36 L118,52 Z" fill="url(#pv-window)" />
-          <path d="M122,52 L122,36 L180,36 L202,52 Z" fill="url(#pv-window)" />
-          {/* B-pillar */}
-          <rect x="119" y="36" width="2" height="16" fill="#050709" />
+            <path d="M32,68 L246,66" stroke="#3d434a" strokeWidth="0.5" opacity="0.9" />
+            <path d="M28,74 L244,72" stroke="#1a1e24" strokeWidth="0.5" opacity="0.7" />
 
-          {/* Waistline highlight */}
-          <path d="M32,68 L246,66" stroke="#3d434a" strokeWidth="0.5" opacity="0.9" />
-          {/* Lower body accent */}
-          <path d="M28,74 L244,72" stroke="#1a1e24" strokeWidth="0.5" opacity="0.7" />
+            <line x1="120" y1="42" x2="120" y2="72" stroke="#050709" strokeWidth="0.5" opacity="0.7" />
+            <line x1="88" y1="44" x2="88" y2="72" stroke="#050709" strokeWidth="0.4" opacity="0.55" />
+            <line x1="180" y1="42" x2="180" y2="72" stroke="#050709" strokeWidth="0.4" opacity="0.55" />
+            <rect x="82" y="60" width="6" height="1.4" rx="0.7" fill="#c9cbcd" opacity="0.55" />
+            <rect x="146" y="60" width="6" height="1.4" rx="0.7" fill="#c9cbcd" opacity="0.55" />
 
-          {/* Door split lines */}
-          <line x1="120" y1="42" x2="120" y2="72" stroke="#050709" strokeWidth="0.5" opacity="0.7" />
-          <line x1="88" y1="44" x2="88" y2="72" stroke="#050709" strokeWidth="0.4" opacity="0.55" />
-          <line x1="180" y1="42" x2="180" y2="72" stroke="#050709" strokeWidth="0.4" opacity="0.55" />
-          {/* Door handles */}
-          <rect x="82" y="60" width="6" height="1.4" rx="0.7" fill="#c9cbcd" opacity="0.55" />
-          <rect x="146" y="60" width="6" height="1.4" rx="0.7" fill="#c9cbcd" opacity="0.55" />
+            <rect x="240" y="64" width="6" height="7" rx="1" fill="#050709" />
+            <ellipse cx="244" cy="60" rx="4" ry="2.4" fill="url(#pv-head)" />
+            <motion.ellipse
+              cx="243"
+              cy="60"
+              rx="2"
+              ry="1.2"
+              fill="hsl(48 100% 88%)"
+              initial={{ opacity: 0.75 }}
+              animate={{ opacity: [0.75, 1, 0.75] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <rect x="19" y="60" width="3" height="4" rx="1" fill="hsl(0 80% 55%)" opacity="0.9" />
 
-          {/* Front bumper detail */}
-          <rect x="240" y="64" width="6" height="7" rx="1" fill="#050709" />
-          {/* Headlight glow */}
-          <ellipse cx="244" cy="60" rx="4" ry="2.4" fill="url(#pv-head)" />
-          <motion.ellipse
-            cx="243"
-            cy="60"
-            rx="2"
-            ry="1.2"
-            fill="hsl(48 100% 88%)"
-            initial={{ opacity: 0.75 }}
-            animate={{ opacity: [0.75, 1, 0.75] }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          {/* Taillight */}
-          <rect x="19" y="60" width="3" height="4" rx="1" fill="hsl(0 80% 55%)" opacity="0.9" />
+            <path d="M56,76 A16,16 0 0 1 88,76" fill="none" stroke="#050709" strokeWidth="1.6" />
+            <path d="M186,76 A16,16 0 0 1 218,76" fill="none" stroke="#050709" strokeWidth="1.6" />
 
-          {/* Wheel arches */}
-          <path d="M56,76 A16,16 0 0 1 88,76" fill="none" stroke="#050709" strokeWidth="1.6" />
-          <path d="M186,76 A16,16 0 0 1 218,76" fill="none" stroke="#050709" strokeWidth="1.6" />
+            {[72, 202].map((cx) => (
+              <g key={cx}>
+                <circle cx={cx} cy={82} r={12.5} fill="#0e1013" />
+                <circle cx={cx} cy={82} r={10} fill="#181c22" />
+                <circle cx={cx} cy={82} r={7.2} fill="#242a32" />
+                {[0, 30, 60, 90, 120, 150].map((deg) => {
+                  const rad = (deg * Math.PI) / 180;
+                  const x2 = cx + Math.cos(rad) * 6.8;
+                  const y2 = 82 + Math.sin(rad) * 6.8;
+                  const x3 = cx - Math.cos(rad) * 6.8;
+                  const y3 = 82 - Math.sin(rad) * 6.8;
+                  return (
+                    <React.Fragment key={deg}>
+                      <line x1={cx} y1={82} x2={x2} y2={y2} stroke="#3d434a" strokeWidth="0.7" />
+                      <line x1={cx} y1={82} x2={x3} y2={y3} stroke="#3d434a" strokeWidth="0.7" />
+                    </React.Fragment>
+                  );
+                })}
+                <circle cx={cx} cy={82} r={1.8} fill="#c9cbcd" />
+              </g>
+            ))}
+          </motion.svg>
 
-          {/* Wheels with spoke detail */}
-          {[72, 202].map((cx) => (
-            <g key={cx}>
-              <circle cx={cx} cy={82} r={12.5} fill="#0e1013" />
-              <circle cx={cx} cy={82} r={10} fill="#181c22" />
-              <circle cx={cx} cy={82} r={7.2} fill="#242a32" />
-              {[0, 30, 60, 90, 120, 150].map((deg) => {
-                const rad = (deg * Math.PI) / 180;
-                const x2 = cx + Math.cos(rad) * 6.8;
-                const y2 = 82 + Math.sin(rad) * 6.8;
-                const x3 = cx - Math.cos(rad) * 6.8;
-                const y3 = 82 - Math.sin(rad) * 6.8;
-                return (
-                  <React.Fragment key={deg}>
-                    <line x1={cx} y1={82} x2={x2} y2={y2} stroke="#3d434a" strokeWidth="0.7" />
-                    <line x1={cx} y1={82} x2={x3} y2={y3} stroke="#3d434a" strokeWidth="0.7" />
-                  </React.Fragment>
-                );
-              })}
-              <circle cx={cx} cy={82} r={1.8} fill="#c9cbcd" />
-            </g>
-          ))}
-        </motion.svg>
+          {/* Status pill directly under the car */}
+          <motion.div
+            initial={{ opacity: 0, y: 4 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.55, duration: 0.5 }}
+            className="mt-1 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.06] px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest text-neutral-300 backdrop-blur-md"
+          >
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+            Subscription active
+          </motion.div>
+        </div>
 
-        {/* Subscription info card \u2014 overlaid, magazine-style */}
+        {/* RIGHT: Subscription info card in its own column */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="absolute bottom-3 right-3 w-[135px] rounded-lg border border-white/10 bg-white/[0.06] px-3 py-2 text-neutral-100 shadow-lg backdrop-blur-md"
+          transition={{ delay: 0.35, duration: 0.55 }}
+          className="relative z-10 flex w-[130px] shrink-0 flex-col justify-center rounded-lg border border-white/10 bg-white/[0.06] px-3 py-2.5 text-neutral-100 shadow-lg backdrop-blur-md"
         >
           <div className="text-[8px] font-semibold uppercase tracking-[0.22em] text-neutral-400">
             Range Rover
           </div>
-          <div className="mt-0.5 flex items-baseline gap-1">
+          <div className="mt-1 flex items-baseline gap-1">
             <span className="text-[17px] font-semibold tracking-tight tabular-nums">
               &pound;2,400
             </span>
             <span className="text-[10px] font-medium text-neutral-400">/ mo</span>
           </div>
-          <div className="mt-1.5 flex flex-wrap gap-1">
+          <div className="mt-2 flex flex-wrap gap-1">
             {['Ins.', 'Tax', 'Serv.', 'Del.'].map((t) => (
               <span
                 key={t}
@@ -202,24 +200,14 @@ export function PivotalVisual() {
               </span>
             ))}
           </div>
-        </motion.div>
-
-        {/* Status pill \u2014 subtle, top-left */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.55, duration: 0.5 }}
-          className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.06] px-2 py-1 text-[9px] font-mono uppercase tracking-widest text-neutral-300 backdrop-blur-md"
-        >
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-          Subscription active
+          <div className="mt-2 text-[8px] text-neutral-400">
+            Pause &middot; resume &middot; home delivery
+          </div>
         </motion.div>
       </div>
     </Frame>
   );
 }
-
 /* ------------------------------- CLINICAL CALL SUMMARISER ---------------------------- */
 export function ClinicalVisual() {
   return (
