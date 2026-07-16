@@ -3,7 +3,8 @@
 
 export const person = {
   name: 'Martha Taylor',
-  role: 'Senior Full-Stack Engineer',
+  role: 'Senior Software Engineer',
+  roles: ['Senior Software Engineer', 'Full-Stack', 'Platform', 'AI Integration'],
   tagline:
     'Senior full-stack engineer. Platform, CI/CD, security & DevSecOps focus — with AI woven in where it earns its keep.',
   location: 'United Kingdom',
@@ -170,6 +171,30 @@ export const clientProjects: ClientProject[] = [
     tech: ['Semgrep', 'SonarQube', 'Trivy', 'Snyk', 'Cypress', 'CI/CD', 'Policy-as-code'],
     liveUrl: null,
     visualId: 'devsecops',
+  },
+  {
+    id: 'retail-ab-cro',
+    name: 'Enterprise Retail · A/B Optimisation',
+    tagline: 'Front-end A/B testing and CRO on a high-traffic UK retail platform.',
+    problem:
+      'On a big retail e-commerce platform, single-digit lifts in the checkout funnel are meaningful revenue. Front-end experiments have to be rigorous, safely feature-flagged, and never destabilise the wider platform.',
+    approach:
+      'Owned A/B experimentation and CRO cycles end-to-end: hypothesis → variant build → feature-flagged rollout → analytics-backed readout. Consulted with product on which variants to prioritise, kept the codebase clear of orphaned experiment code, and folded winning variants back into the design system.',
+    tech: ['React', 'A/B testing', 'CRO', 'Feature flags', 'Analytics', 'Design systems'],
+    liveUrl: null,
+    visualId: 'ab-testing',
+  },
+  {
+    id: 'asset-mgmt-campaigns',
+    name: 'Asset Management · Seasonal Campaigns',
+    tagline: 'Sophisticated seasonal front-end campaigns for a traditional investment firm.',
+    problem:
+      'A long-established investment firm running seasonal campaigns (Pride in June, others across the year) had to keep the calm, sophisticated brand voice its clients expect — no loud colour blocking, no marketing shout.',
+    approach:
+      'Led the front-end delivery of the campaign UIs: colour, imagery, hero sections and micro-interactions all tuned to feel considered, never gaudy. Reused existing design tokens where possible, added campaign-scoped tokens where needed, and shipped through feature flags so the seasonal switchovers were seamless.',
+    tech: ['React', 'Design tokens', 'Feature flags', 'CSS motion', 'CMS'],
+    liveUrl: null,
+    visualId: 'campaigns',
   },
 ];
 

@@ -109,6 +109,7 @@ export function FloodsaveVisual() {
 
         {/* Highlighted evacuation path (dashed, animated) */}
         <motion.path
+          id="evac-path"
           initial={{ pathLength: 0, opacity: 0 }}
           whileInView={{ pathLength: 1, opacity: 1 }}
           viewport={{ once: true }}
@@ -120,6 +121,13 @@ export function FloodsaveVisual() {
           strokeLinecap="round"
           strokeDasharray="6 5"
           filter="url(#fs-glow)"
+        />
+        {/* Invisible reference path for animateMotion */}
+        <path
+          id="fs-motion-path"
+          d="M40,148 C90,146 130,140 170,128 C205,118 240,102 285,80"
+          fill="none"
+          stroke="none"
         />
 
         {/* Flood water sweeping in from the left (rises + moves right) */}
@@ -165,22 +173,10 @@ export function FloodsaveVisual() {
           ))}
         </motion.g>
 
-        {/* Pedestrian icon (person walking) moving up the path on foot */}
-        <motion.g
-          initial={{ offsetDistance: '10%', opacity: 0 }}
-          whileInView={{ offsetDistance: '85%', opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 3.4, ease: 'easeInOut', delay: 0.5 }}
-          style={{
-            offsetPath: 'path("M40,148 C90,146 130,140 170,128 C205,118 240,102 285,80")',
-            offsetRotate: '0deg',
-          } as React.CSSProperties}
-        >
-          {/* Head */}
+        {/* Pedestrian (on foot) walking up the path */}
+        <g>
           <circle cx="0" cy="-11" r="3" fill="hsl(30 55% 45%)" />
-          {/* Body */}
           <rect x="-2" y="-8" width="4" height="7" rx="1.2" fill="hsl(210 65% 45%)" />
-          {/* Legs */}
           <motion.line
             x1="0" y1="-1" x2="-2" y2="4"
             stroke="hsl(210 65% 30%)" strokeWidth="1.4" strokeLinecap="round"
@@ -195,32 +191,24 @@ export function FloodsaveVisual() {
             style={{ originX: '0px', originY: '-1px' }}
             transition={{ duration: 0.5, repeat: Infinity, ease: 'easeInOut' }}
           />
-        </motion.g>
+          <animateMotion dur="3.4s" begin="0.6s" fill="freeze" keyPoints="0.1;0.85" keyTimes="0;1" calcMode="linear">
+            <mpath href="#fs-motion-path" />
+          </animateMotion>
+        </g>
 
         {/* Car moving up the path (a bit ahead of the pedestrian) */}
-        <motion.g
-          initial={{ offsetDistance: '35%', opacity: 0 }}
-          whileInView={{ offsetDistance: '95%', opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 3.0, ease: 'easeInOut', delay: 0.4 }}
-          style={{
-            offsetPath: 'path("M40,148 C90,146 130,140 170,128 C205,118 240,102 285,80")',
-            offsetRotate: '0deg',
-          } as React.CSSProperties}
-        >
-          {/* Car body */}
+        <g>
           <rect x="-8" y="-6" width="16" height="6" rx="1.5" fill="hsl(0 75% 55%)" />
-          {/* Car roof */}
           <rect x="-5" y="-9" width="9" height="3.5" rx="1" fill="hsl(0 75% 45%)" />
-          {/* Windows */}
           <rect x="-4" y="-8.5" width="3.5" height="2.5" rx="0.4" fill="hsl(200 80% 85%)" opacity="0.9" />
           <rect x="0.2" y="-8.5" width="3.5" height="2.5" rx="0.4" fill="hsl(200 80% 85%)" opacity="0.9" />
-          {/* Wheels */}
           <circle cx="-5" cy="0.5" r="1.8" fill="#111" />
           <circle cx="5" cy="0.5" r="1.8" fill="#111" />
-          {/* Headlight glow (forward) */}
           <circle cx="8" cy="-3" r="1.2" fill="hsl(50 100% 75%)" opacity="0.9" />
-        </motion.g>
+          <animateMotion dur="3s" begin="0.4s" fill="freeze" keyPoints="0.35;0.95" keyTimes="0;1" calcMode="linear">
+            <mpath href="#fs-motion-path" />
+          </animateMotion>
+        </g>
 
         {/* Legend chips */}
         <g fontFamily="ui-sans-serif, system-ui" fontSize="7" fill="currentColor">

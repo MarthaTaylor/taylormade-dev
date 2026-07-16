@@ -28,12 +28,22 @@ export function Hero() {
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/60 px-3 py-1 text-xs text-muted-foreground shadow-sm">
             <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-            Available for senior full-stack roles
+            Open to opportunities
           </div>
 
           <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight md:text-6xl">
             {person.name}
           </h1>
+
+          {/* Roles line \u2014 what Martha is open to (LinkedIn-style) */}
+          <p className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] text-foreground/80 md:text-[15px]">
+            {person.roles.map((r, i) => (
+              <React.Fragment key={r}>
+                {i > 0 && <span aria-hidden className="text-muted-foreground">&middot;</span>}
+                <span>{r}</span>
+              </React.Fragment>
+            ))}
+          </p>
 
           <p className="mt-4 max-w-2xl text-balance text-lg text-foreground/80 md:text-xl">
             {person.tagline}

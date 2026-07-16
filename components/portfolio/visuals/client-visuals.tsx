@@ -45,84 +45,177 @@ function Frame({
 export function PivotalVisual() {
   return (
     <Frame
-      gradient="bg-gradient-to-br from-neutral-100 via-stone-50 to-emerald-50 dark:from-neutral-900 dark:via-stone-950 dark:to-emerald-950/30"
-      label="Car subscription"
-      labelClass="text-neutral-800 dark:text-neutral-200"
+      gradient="bg-gradient-to-br from-neutral-900 via-neutral-900 to-neutral-800 dark:from-black dark:via-neutral-950 dark:to-neutral-900"
+      label="Pivotal"
+      labelClass="text-neutral-300"
     >
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="relative w-full max-w-[300px] overflow-hidden rounded-xl border border-border/70 bg-card shadow-[0_18px_50px_-24px_rgba(0,0,0,0.35)]"
-      >
-        {/* SUV silhouette */}
-        <div className="relative h-16 bg-gradient-to-br from-emerald-100 to-stone-100 dark:from-emerald-950/40 dark:to-stone-900">
-          {/* road */}
-          <div className="absolute inset-x-0 bottom-0 h-6 bg-neutral-800 dark:bg-neutral-950">
-            <motion.div
-              className="absolute top-1/2 h-0.5 w-full -translate-y-1/2 [background:repeating-linear-gradient(90deg,white_0_10px,transparent_10px_22px)]"
-              animate={{ backgroundPositionX: ['0px', '-32px'] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: 'linear' }}
-            />
-          </div>
-          {/* SUV */}
-          <motion.svg
-            viewBox="0 0 120 40"
-            className="absolute bottom-3 left-1/2 h-10 -translate-x-1/2"
-            initial={{ y: -2 }}
-            animate={{ y: [-2, 0, -2] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-            aria-hidden
-          >
-            <path
-              d="M8,28 L18,14 L58,10 L80,14 L106,18 L112,22 L112,28 Z"
-              fill="hsl(0 0% 15%)"
-            />
-            <rect x="22" y="14" width="22" height="10" rx="1" fill="hsl(200 70% 80%)" opacity="0.85" />
-            <rect x="48" y="14" width="26" height="10" rx="1" fill="hsl(200 70% 80%)" opacity="0.85" />
-            <circle cx="30" cy="30" r="4" fill="#111" />
-            <circle cx="92" cy="30" r="4" fill="#111" />
-            <circle cx="30" cy="30" r="1.5" fill="#666" />
-            <circle cx="92" cy="30" r="1.5" fill="#666" />
-            <rect x="108" y="20" width="3" height="3" fill="hsl(50 100% 65%)" />
-          </motion.svg>
-        </div>
+      <div className="relative flex h-full w-full items-center justify-center">
+        {/* Warm rim lighting */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(255,180,60,0.14),transparent_55%),radial-gradient(circle_at_75%_35%,rgba(120,200,255,0.10),transparent_55%)]"
+        />
+        {/* Faint horizon line */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-6 bottom-8 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
+        />
 
-        {/* Subscription card body */}
-        <div className="space-y-2 p-3">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Range Rover</div>
-              <div className="text-[13px] font-semibold">Monthly subscription</div>
-            </div>
-            <div className="text-right">
-              <div className="text-[10px] uppercase tracking-widest text-muted-foreground">/ month</div>
-              <div className="tabular-nums text-[13px] font-semibold">£2,400</div>
-            </div>
+        {/* Detailed SUV silhouette */}
+        <motion.svg
+          viewBox="0 0 260 110"
+          className="relative z-10 h-full w-[260px] drop-shadow-[0_18px_18px_rgba(0,0,0,0.55)]"
+          initial={{ opacity: 0, x: -18 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          aria-hidden
+        >
+          <defs>
+            <linearGradient id="pv-body" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#2f363d" />
+              <stop offset="55%" stopColor="#191d22" />
+              <stop offset="100%" stopColor="#0a0c10" />
+            </linearGradient>
+            <linearGradient id="pv-roof" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#3a4048" />
+              <stop offset="100%" stopColor="#1a1e24" />
+            </linearGradient>
+            <linearGradient id="pv-window" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#0f1216" />
+              <stop offset="100%" stopColor="#05070a" />
+            </linearGradient>
+            <radialGradient id="pv-shadow" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stopColor="#000" stopOpacity="0.7" />
+              <stop offset="100%" stopColor="#000" stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="pv-head" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stopColor="hsl(45 100% 82%)" stopOpacity="0.95" />
+              <stop offset="60%" stopColor="hsl(38 100% 65%)" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="hsl(38 100% 65%)" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+
+          {/* Ground shadow */}
+          <ellipse cx="130" cy="98" rx="112" ry="5" fill="url(#pv-shadow)" opacity="0.65" />
+
+          {/* Body */}
+          <path
+            d="M18,76 C20,64 30,56 44,54 L78,48 C100,44 122,42 152,42 L188,42 C214,44 230,50 240,56 L248,60 C250,62 250,66 248,70 L246,76 L232,78 L228,76 L184,76 L180,78 L94,78 L90,76 L40,76 L36,78 L22,76 Z"
+            fill="url(#pv-body)"
+          />
+
+          {/* Roof structure */}
+          <path d="M62,54 L78,34 L182,34 L206,54 Z" fill="url(#pv-roof)" />
+
+          {/* Chrome trim on top of windows */}
+          <line x1="62" y1="54" x2="206" y2="54" stroke="#c9cbcd" strokeWidth="0.4" opacity="0.55" />
+
+          {/* Windows tinted */}
+          <path d="M68,52 L82,36 L118,36 L118,52 Z" fill="url(#pv-window)" />
+          <path d="M122,52 L122,36 L180,36 L202,52 Z" fill="url(#pv-window)" />
+          {/* B-pillar */}
+          <rect x="119" y="36" width="2" height="16" fill="#050709" />
+
+          {/* Waistline highlight */}
+          <path d="M32,68 L246,66" stroke="#3d434a" strokeWidth="0.5" opacity="0.9" />
+          {/* Lower body accent */}
+          <path d="M28,74 L244,72" stroke="#1a1e24" strokeWidth="0.5" opacity="0.7" />
+
+          {/* Door split lines */}
+          <line x1="120" y1="42" x2="120" y2="72" stroke="#050709" strokeWidth="0.5" opacity="0.7" />
+          <line x1="88" y1="44" x2="88" y2="72" stroke="#050709" strokeWidth="0.4" opacity="0.55" />
+          <line x1="180" y1="42" x2="180" y2="72" stroke="#050709" strokeWidth="0.4" opacity="0.55" />
+          {/* Door handles */}
+          <rect x="82" y="60" width="6" height="1.4" rx="0.7" fill="#c9cbcd" opacity="0.55" />
+          <rect x="146" y="60" width="6" height="1.4" rx="0.7" fill="#c9cbcd" opacity="0.55" />
+
+          {/* Front bumper detail */}
+          <rect x="240" y="64" width="6" height="7" rx="1" fill="#050709" />
+          {/* Headlight glow */}
+          <ellipse cx="244" cy="60" rx="4" ry="2.4" fill="url(#pv-head)" />
+          <motion.ellipse
+            cx="243"
+            cy="60"
+            rx="2"
+            ry="1.2"
+            fill="hsl(48 100% 88%)"
+            initial={{ opacity: 0.75 }}
+            animate={{ opacity: [0.75, 1, 0.75] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          {/* Taillight */}
+          <rect x="19" y="60" width="3" height="4" rx="1" fill="hsl(0 80% 55%)" opacity="0.9" />
+
+          {/* Wheel arches */}
+          <path d="M56,76 A16,16 0 0 1 88,76" fill="none" stroke="#050709" strokeWidth="1.6" />
+          <path d="M186,76 A16,16 0 0 1 218,76" fill="none" stroke="#050709" strokeWidth="1.6" />
+
+          {/* Wheels with spoke detail */}
+          {[72, 202].map((cx) => (
+            <g key={cx}>
+              <circle cx={cx} cy={82} r={12.5} fill="#0e1013" />
+              <circle cx={cx} cy={82} r={10} fill="#181c22" />
+              <circle cx={cx} cy={82} r={7.2} fill="#242a32" />
+              {[0, 30, 60, 90, 120, 150].map((deg) => {
+                const rad = (deg * Math.PI) / 180;
+                const x2 = cx + Math.cos(rad) * 6.8;
+                const y2 = 82 + Math.sin(rad) * 6.8;
+                const x3 = cx - Math.cos(rad) * 6.8;
+                const y3 = 82 - Math.sin(rad) * 6.8;
+                return (
+                  <React.Fragment key={deg}>
+                    <line x1={cx} y1={82} x2={x2} y2={y2} stroke="#3d434a" strokeWidth="0.7" />
+                    <line x1={cx} y1={82} x2={x3} y2={y3} stroke="#3d434a" strokeWidth="0.7" />
+                  </React.Fragment>
+                );
+              })}
+              <circle cx={cx} cy={82} r={1.8} fill="#c9cbcd" />
+            </g>
+          ))}
+        </motion.svg>
+
+        {/* Subscription info card \u2014 overlaid, magazine-style */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="absolute bottom-3 right-3 w-[135px] rounded-lg border border-white/10 bg-white/[0.06] px-3 py-2 text-neutral-100 shadow-lg backdrop-blur-md"
+        >
+          <div className="text-[8px] font-semibold uppercase tracking-[0.22em] text-neutral-400">
+            Range Rover
           </div>
-          <div className="flex flex-wrap gap-1 text-[9px]">
-            {['Insurance', 'Servicing', 'Road tax', 'Delivery'].map((t) => (
-              <span key={t} className="rounded-full bg-muted px-1.5 py-0.5 text-muted-foreground">{t}</span>
+          <div className="mt-0.5 flex items-baseline gap-1">
+            <span className="text-[17px] font-semibold tracking-tight tabular-nums">
+              &pound;2,400
+            </span>
+            <span className="text-[10px] font-medium text-neutral-400">/ mo</span>
+          </div>
+          <div className="mt-1.5 flex flex-wrap gap-1">
+            {['Ins.', 'Tax', 'Serv.', 'Del.'].map((t) => (
+              <span
+                key={t}
+                className="rounded-sm bg-white/10 px-1 py-0.5 text-[8px] font-medium uppercase tracking-widest text-neutral-200"
+              >
+                {t}
+              </span>
             ))}
           </div>
-          <div className="flex items-center gap-1.5 pt-1">
-            <motion.div
-              className="inline-flex items-center gap-1 rounded-md bg-primary px-2 py-1 text-[10px] font-medium text-primary-foreground"
-              animate={{ opacity: [1, 0.75, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <Play className="h-2.5 w-2.5" /> Active
-            </motion.div>
-            <div className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-[10px] text-muted-foreground">
-              <Pause className="h-2.5 w-2.5" /> Pause &amp; play
-            </div>
-            <div className="ml-auto inline-flex items-center gap-1 text-[10px] text-muted-foreground">
-              <KeyRound className="h-2.5 w-2.5" /> Home delivery
-            </div>
-          </div>
-        </div>
-      </motion.div>
+        </motion.div>
+
+        {/* Status pill \u2014 subtle, top-left */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.55, duration: 0.5 }}
+          className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.06] px-2 py-1 text-[9px] font-mono uppercase tracking-widest text-neutral-300 backdrop-blur-md"
+        >
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+          Subscription active
+        </motion.div>
+      </div>
     </Frame>
   );
 }
@@ -395,6 +488,156 @@ export function DevSecOpsVisual() {
   );
 }
 
+/* --------------------------------- RETAIL A/B TESTING --------------------------------- */
+export function AbTestingVisual() {
+  return (
+    <Frame
+      gradient="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-blue-950/25 dark:to-indigo-950/25"
+      label="A/B experiment"
+      labelClass="text-slate-800 dark:text-slate-200"
+    >
+      <div className="flex items-center justify-center gap-2">
+        {/* Variant A (control) */}
+        <motion.div
+          initial={{ opacity: 0, x: -8 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="w-[92px] rounded-md border border-border/60 bg-card p-2 shadow-sm"
+        >
+          <div className="flex items-center justify-between text-[8px] font-semibold uppercase tracking-widest text-muted-foreground">
+            <span>A</span>
+            <span>control</span>
+          </div>
+          <div className="mt-1 h-6 rounded bg-gradient-to-br from-slate-200 to-slate-100 dark:from-slate-800 dark:to-slate-900" />
+          <div className="mt-1 space-y-1">
+            <div className="h-1 w-16 rounded-full bg-muted-foreground/30" />
+            <div className="h-1 w-12 rounded-full bg-muted-foreground/20" />
+          </div>
+          <div className="mt-1.5 flex h-3 items-center justify-center rounded bg-slate-500 text-[7px] font-semibold uppercase tracking-widest text-white">
+            Buy
+          </div>
+          <div className="mt-1 text-right text-[9px] tabular-nums font-medium text-muted-foreground">
+            CVR 4.1%
+          </div>
+        </motion.div>
+
+        {/* Winner delta */}
+        <motion.div
+          initial={{ scale: 0.85, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.35, type: 'spring', damping: 14 }}
+          className="flex flex-col items-center gap-0.5"
+        >
+          <div className="rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-bold text-white shadow">
+            +3.2%
+          </div>
+          <span className="text-[7px] font-semibold uppercase tracking-widest text-emerald-700 dark:text-emerald-400">
+            winner
+          </span>
+        </motion.div>
+
+        {/* Variant B (winner) */}
+        <motion.div
+          initial={{ opacity: 0, x: 8 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="w-[92px] rounded-md border-2 border-emerald-500/70 bg-card p-2 shadow-md ring-2 ring-emerald-500/10"
+        >
+          <div className="flex items-center justify-between text-[8px] font-semibold uppercase tracking-widest text-emerald-700 dark:text-emerald-400">
+            <span>B</span>
+            <span>variant</span>
+          </div>
+          <div className="mt-1 h-6 rounded bg-gradient-to-br from-emerald-200 to-emerald-100 dark:from-emerald-900/40 dark:to-emerald-950/20" />
+          <div className="mt-1 space-y-1">
+            <div className="h-1 w-16 rounded-full bg-emerald-500/40" />
+            <div className="h-1 w-14 rounded-full bg-emerald-500/25" />
+          </div>
+          <div className="mt-1.5 flex h-3 items-center justify-center rounded bg-emerald-500 text-[7px] font-semibold uppercase tracking-widest text-white">
+            Add to bag
+          </div>
+          <div className="mt-1 text-right text-[9px] tabular-nums font-semibold text-emerald-700 dark:text-emerald-400">
+            CVR 4.3%
+          </div>
+        </motion.div>
+      </div>
+    </Frame>
+  );
+}
+
+/* ----------------------------- ASSET MGMT · SEASONAL CAMPAIGN ----------------------------- */
+export function CampaignsVisual() {
+  return (
+    <Frame
+      gradient="bg-gradient-to-br from-stone-50 via-neutral-50 to-slate-50 dark:from-stone-950 dark:via-neutral-950 dark:to-slate-950"
+      label="June · Pride edition"
+      labelClass="text-neutral-700 dark:text-neutral-300"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.55 }}
+        className="relative w-full max-w-[280px] overflow-hidden rounded-lg border border-border/60 bg-card shadow-md"
+      >
+        {/* Understated Pride ribbon */}
+        <div
+          className="h-1.5 w-full"
+          style={{
+            background:
+              'linear-gradient(to right, rgba(228,3,3,0.42) 0%, rgba(255,140,0,0.42) 20%, rgba(255,215,0,0.42) 40%, rgba(0,128,38,0.42) 60%, rgba(0,77,255,0.42) 80%, rgba(117,7,135,0.42) 100%)',
+          }}
+        />
+
+        <div className="p-3">
+          <div className="flex items-center justify-between">
+            <div className="text-[8px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              Insights &middot; June
+            </div>
+            <div className="text-[8px] font-mono uppercase tracking-widest text-muted-foreground">
+              Est. 1892
+            </div>
+          </div>
+
+          <h5 className="mt-1.5 text-[14px] font-semibold leading-tight tracking-tight">
+            Considered wealth. All year. All welcome.
+          </h5>
+          <p className="mt-1 text-[10px] leading-relaxed text-muted-foreground">
+            A quiet update for the season &mdash; same principles, same portfolios, a little more colour where it counts.
+          </p>
+
+          <div className="mt-2 flex items-center gap-1.5">
+            <div className="rounded-sm bg-primary px-1.5 py-0.5 text-[9px] font-medium text-primary-foreground">
+              Read now
+            </div>
+            <div className="text-[9px] text-muted-foreground">3 min read</div>
+            <motion.div
+              className="ml-auto flex gap-0.5"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              {['#E40303', '#FF8C00', '#FFD700', '#008026', '#004DFF', '#750787'].map((c, i) => (
+                <motion.span
+                  key={i}
+                  className="block h-2 w-1 rounded-full"
+                  style={{ backgroundColor: c }}
+                  initial={{ opacity: 0.4 }}
+                  animate={{ opacity: [0.4, 0.9, 0.4] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: i * 0.12 }}
+                />
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
+    </Frame>
+  );
+}
+
 /* -------------------------------- Router / lookup -------------------------------- */
 const byId: Record<string, React.ComponentType> = {
   pivotal: PivotalVisual,
@@ -402,6 +645,8 @@ const byId: Record<string, React.ComponentType> = {
   eventdriven: EventDrivenVisual,
   goldenpath: GoldenPathVisual,
   devsecops: DevSecOpsVisual,
+  'ab-testing': AbTestingVisual,
+  campaigns: CampaignsVisual,
 };
 
 export function ClientVisual({ id }: { id: string }) {
