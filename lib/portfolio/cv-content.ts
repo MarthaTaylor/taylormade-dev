@@ -96,14 +96,14 @@ export const cvsFull: Cv[] = [
       'Google / Udacity NanoDegree — Front-End Web Development & Design (top 2% EMEA)',
       'Technological University Dublin — BSc (Hons) Digital Technology, Design & Innovation',
     ],
-    downloadUrl: 'https://customer-assets.emergentagent.com/job_engineer-portfolio-77/artifacts/26lljk8f_Martha-Taylor-CV-DevOps-CICD.docx',
-    downloadFormat: 'DOCX',
+    downloadUrl: '/cv/Martha-Taylor-CV-DevSecOps-CICD.pdf',
+    downloadFormat: 'PDF',
   },
 ];
 
 // Also export a light record of variants (including download-only ones)
 export const cvVariants = [
-  { id: 'devsecops-cicd',       slug: 'devsecops-cicd',      label: 'DevSecOps · CI/CD · Platform',   downloadUrl: 'https://customer-assets.emergentagent.com/job_engineer-portfolio-77/artifacts/26lljk8f_Martha-Taylor-CV-DevOps-CICD.docx',       format: 'DOCX' as const, viewable: true },
-  { id: 'platform-devsecops',   slug: 'platform-devsecops',  label: 'Platform Engineer · DevSecOps',   downloadUrl: 'https://customer-assets.emergentagent.com/job_engineer-portfolio-77/artifacts/vi47i0py_Martha-Taylor-CV-Platform-DevSecOps.docx',  format: 'DOCX' as const, viewable: false },
-  { id: 'full-stack',           slug: 'full-stack',          label: 'Full-Stack Engineer',              downloadUrl: 'https://customer-assets.emergentagent.com/job_engineer-portfolio-77/artifacts/t4afkuw0_Martha_Taylor_CV.pdf',                        format: 'PDF'  as const, viewable: false },
+  { id: 'devsecops-cicd',       slug: 'devsecops-cicd',      label: 'DevSecOps · CI/CD · Platform',   downloadUrl: '/cv/Martha-Taylor-CV-DevSecOps-CICD.pdf',       format: 'PDF' as const, viewable: true },
+  { id: 'platform-devsecops',   slug: 'platform-devsecops',  label: 'Platform Engineer · DevSecOps',   downloadUrl: '/cv/Martha-Taylor-CV-Platform-DevSecOps.pdf',  format: 'PDF' as const, viewable: false },
+  { id: 'full-stack',           slug: 'full-stack',          label: 'Full-Stack Engineer',              downloadUrl: '/cv/Martha-Taylor-CV-Full-Stack.pdf',                        format: 'PDF' as const, viewable: false },
 ];
