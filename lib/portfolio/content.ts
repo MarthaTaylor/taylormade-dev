@@ -10,7 +10,7 @@ export const person = {
   email: 'hello@marthataylor.dev',
   github: 'https://github.com/MarthaTaylor',
   linkedin: 'https://www.linkedin.com/in/martha-taylor',
-  cvUrl: '/cv',
+  cvUrl: '/cv/Martha-Taylor-CV-DevSecOps-CICD.pdf',
   githubHandle: 'MarthaTaylor',
 };
 
