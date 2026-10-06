@@ -6,7 +6,6 @@ import { ExternalLink, Code2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { PennylaneVisual } from './visuals/pennylane-visual';
 import { GenkitVisual } from './visuals/genkit-visual';
 
 type Props = {
@@ -27,7 +26,6 @@ type Props = {
 };
 
 function VisualFor({ id }: { id: string }) {
-  if (id === 'pennylane-transactions') return <PennylaneVisual />;
   if (id === 'genkit-content-scraper') return <GenkitVisual />;
   return null;
 }

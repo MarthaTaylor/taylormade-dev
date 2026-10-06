@@ -94,31 +94,6 @@ export const skillGroups = [
 
 export const heroProjects = [
   {
-    id: 'pennylane-transactions',
-    title: 'Financial Transactions Interface',
-    subtitle: 'React + TypeScript engineering challenge',
-    company: 'Private fintech · May–Jun 2026',
-    stack: ['React', 'TypeScript', 'React Query', 'Zod', 'react-hook-form', 'Vitest'],
-    problem:
-      "Build a production-grade transactions interface that stays responsive with thousands of rows, supports server-driven filtering and pagination, and demonstrates the component patterns you'd actually put into a real product.",
-    approach:
-      'Server-driven pagination and filtering wired through React Query so cache, invalidation and refetching are honest. A typed API layer with Zod schemas that double as form validation. Composable table architecture that separates data hooks from presentation, so the table is dumb and the state is reusable. Controlled forms with react-hook-form + Zod, URL as the source of truth for filters (deep-linkable), optimistic updates on mutations, and accessible focus / keyboard / skeleton loading states throughout.',
-    decisions: [
-      'URL as canonical filter state instead of local component state — pages are deep-linkable and back/forward feels natural.',
-      'Headless data hooks + presentational components — the table is trivial to reuse and easy to test.',
-      'One Zod schema per resource, shared between form validation and API response parsing — one source of truth.',
-      'Feature-first folder layout so each vertical (transactions, filters, forms) owns its own edges.',
-    ],
-    improveNext: [
-      'Row virtualisation (TanStack Virtual) for very large lists.',
-      'Offline-first cache via IndexedDB for a snappier reopen.',
-      'Broader state-transition test coverage with Playwright.',
-    ],
-    demoUrl: null as string | null,
-    codeUrl: null as string | null,
-    screenshotAlt: 'Transactions table with filters, search and pagination',
-  },
-  {
     id: 'genkit-content-scraper',
     title: 'Content-Scraping + LLM Pipeline with Google Genkit',
     subtitle: 'AI technical test — case study',
@@ -166,7 +141,7 @@ export const clientProjects: ClientProject[] = [
     problem:
       'A flexible alternative to leasing and ownership for premium SUVs — one monthly subscription that bundles insurance, road tax, servicing, home delivery and pause/resume, all under a single account.',
     approach:
-      "Contributed across the platform and the customer-facing product. Delivered the affordability-check integration inside the Pivotal mobile app so applicants could complete an Equifax-backed check in-flow — signing into their banks via facial recognition without ever leaving the app — backed by Java microservices calling the Equifax API. Also contributed to the platform engineering behind the wider product: reusable golden-path templates on GKE, secure IAM defaults, policy-as-code in Backstage, and DevSecOps CI/CD quality gates so feature teams could ship safely and fast.",
+      "Contributed across the platform and the customer-facing product. Collaborated on delivering the affordability-check integration inside the Pivotal mobile app so applicants could complete an Equifax-backed check in-flow — signing into their banks via facial recognition without ever leaving the app — backed by Java microservices calling the Equifax API. Also contributed to the platform engineering behind the wider product: reusable golden-path templates on GKE, secure IAM defaults, policy-as-code in Backstage, and DevSecOps CI/CD quality gates so feature teams could ship safely and fast.",
     tech: ['React', 'Node.js', 'Java microservices', 'Equifax API', 'Facial recognition', 'GKE', 'GCP', 'Backstage', 'Terraform', 'CI/CD'],
     liveUrl: 'https://www.drivepivotal.com/',
     visualId: 'pivotal',
