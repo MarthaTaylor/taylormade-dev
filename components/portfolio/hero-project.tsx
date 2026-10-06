@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { GenkitVisual } from './visuals/genkit-visual';
+import { PennylaneVisual } from './visuals/pennylane-visual';
 
 type Props = {
   index: number;
@@ -26,6 +27,7 @@ type Props = {
 };
 
 function VisualFor({ id }: { id: string }) {
+  if (id === 'pennylane-transactions') return <PennylaneVisual />;
   if (id === 'genkit-content-scraper') return <GenkitVisual />;
   return null;
 }
