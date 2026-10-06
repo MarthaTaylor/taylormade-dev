@@ -10,8 +10,9 @@ export const metadata = {
   title: 'CV — Martha Taylor',
 };
 
-export default function CvPage() {
-  const cv = cvsFull[0]; // Default to the DevSecOps / CI-CD / Platform variant
+export default function CvPage({ searchParams }: { searchParams?: { v?: string } }) {
+  const slug = searchParams?.v;
+  const cv = (slug && cvsFull.find((c) => c.slug === slug)) || cvsFull[0];
   if (!cv) notFound();
 
   return (
